@@ -1,0 +1,16 @@
+# Standard libs
+numpy>=1.19.0
+pandas>=1.2.4
+matplotlib>=3.4.2
+
+# OpenCV
+opencv-contrib-python>=4.5.1.48
+opencv-python>=4.3.0.36
+
+# PyTorch
+torch>=1.7.1
+torchvision>=0.8.2
+
+# Pytorch-lightning for notebooks
+pytorch-lightning>=1.2.0
+pytorch-lightning-bolts>=0.3.2
