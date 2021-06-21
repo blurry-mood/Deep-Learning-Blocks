@@ -3,5 +3,5 @@
   - [x] Python code
   - [x] Notebook
   - [x] Tests
-  - [ ] Documentation
+  - [x] Documentation
   - [x] Log updates
