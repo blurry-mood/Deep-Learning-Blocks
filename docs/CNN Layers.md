@@ -1,4 +1,6 @@
 ## Input Aware Layer
+This layer takes an input tensor (B, C, H, W) and applies conv2d operation to it, but with different kernels for every sample in the batch.
+
 The name comes from the fact that this layer uses customized convolution kernels for each image (or feature map) in the batch. Instead of applying the same kernels for all input images, it uses kernels provided by the Hidden layer (specified below).  
 Thus, it's aware of the input's content.
 
