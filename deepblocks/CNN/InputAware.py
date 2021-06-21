@@ -94,7 +94,7 @@ class ConvBlock(nn.Module):
         self.hidden = Hidden(in_channels, in_channels*out_channels, mid_channels,
                              drop_pb, kernel_size,
                              use_linear=use_linear)
-        self.bias = nn.Parameter(torch.randn(out_channels))
+        # self.bias = nn.Parameter(torch.randn(out_channels))
 
     def forward(self, x):
         '''
@@ -119,6 +119,6 @@ class ConvBlock(nn.Module):
         # Apply 2d Conv in an image-wise manner, first in_channels kernels applied to first images,
         # 2nd kernels to 2nd image, etc.
         # Then separate the out_channels of each image, yielding a batch dimension.
-        z = F.conv2d(x, kernels, padding=1, stride=1, groups=batch).unflatten(
+        z = F.conv2d(x, kernels, bias=None, padding=1, stride=1, groups=batch).unflatten(
             1, (batch, self.out_channels)).squeeze(0)
         return z
