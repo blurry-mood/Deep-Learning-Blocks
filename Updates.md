@@ -1,9 +1,12 @@
 ## June 25, 2021:
+* Add **Squeeze-Excitation** block, with its tests and documentation.
+
+## June 25, 2021:
 * Add **FReLU** layer, with its tests and documentation.
 * Add **FlipConv** layer, with its tests and documentation.
  
 ## June 21, 2021:
-* Add unit test of the InputAware layer.
+* Add unit test of the **InputAware** layer.
 * Document this layer.
 
 ## June 20, 2021:
