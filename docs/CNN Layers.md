@@ -15,10 +15,10 @@ Thus, it's aware of the input's content.
 
 ### **How to use**:
 1- Import ConvBlock:
-> from deepblocks.CNN.InputAware import ConvBlock
+> from deepblocks import InputAwareConv2d
 
 2- Create an instance:
->  conv_block = ConvBlock(in_channels, out_channels, mid_channels, drop_pb, kernel_size, use_linear)
+>  ia_conv = InputAwareConv2d(in_channels, out_channels, mid_channels, drop_pb, kernel_size, use_linear)
 * `mid_channels`: the number of output channels after applying the first conv2d layer in the Hidden layer.
 * `use_linear`: if True, Linears is applied to the set of kernels.
 * `kernel_size`: the desired size of the kernels to apply to the input tensor.
@@ -38,7 +38,7 @@ Please note that *p* a window of *learnable* parameters, and it is shared in the
 
 ### **How to use**:
 1- Import FReLU:
-> from deepblocks.CNN.FReLU import FReLU
+> from deepblocks import FReLU
 
 2- Create an instance:
 >  frelu = FReLU(in_channels, kernel_size=3)
@@ -72,7 +72,7 @@ For the second image, the matrix is both horizontally and vertically symmetric.
 
 ### **How to use**:
 1- Import ConvBlock:
-> from deepblocks.CNN.FlipConv2d import FlipConv2d
+> from deepblocks import FlipConv2d
 
 2- Create an instance:
 >  flip_conv = FlipConv2d(h_invariant: bool = True, v_invariant: bool = True, **kwargs)
@@ -97,7 +97,7 @@ The image below depicts the architecture of SE block as described in the orignal
 
 ### **How to use**:
 1- Import ConvBlock:
-> from deepblocks.CNN.SE import SE
+> from deepblocks import SE
 
 2- Create an instance:
 >  se = SE(in_channels: int, ratio: int = 16)
