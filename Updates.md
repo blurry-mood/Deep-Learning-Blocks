@@ -1,4 +1,5 @@
 ## June 25, 2021:
+* Alter import statements in deepblocks/__init__.py
 * Add **Squeeze-Excitation** block, with its tests and documentation.
 
 ## June 25, 2021:
