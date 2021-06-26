@@ -1,7 +1,7 @@
 ''' Test the initialization and the forward pass of the FReLU layer
 '''
 
-from deepblocks.CNN.FReLU import FReLU
+from deepblocks import FReLU
 import torch
 
 

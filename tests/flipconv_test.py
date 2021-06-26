@@ -1,7 +1,7 @@
 ''' Test the initialization, forward and backward propagation of the FlipConv2d layer
 '''
 
-from deepblocks.CNN.FlipConv2d import FlipConv2d
+from deepblocks import FlipConv2d
 import torch
 
 

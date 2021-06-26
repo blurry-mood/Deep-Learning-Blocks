@@ -1,7 +1,7 @@
 ''' Test the initialization, forward and backward propagation of the Squeeze-Excitation block
 '''
 
-from deepblocks.CNN.SE import SE
+from deepblocks import SE
 import torch
 
 
