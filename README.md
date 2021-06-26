@@ -1,5 +1,5 @@
 # Deep-Learning-Blocks
-A library with customized PyTorch layers and model architectures.
+A library with customized PyTorch layers and model components.
 
 ## What's available for use:
 * [InputAware Layer](docs/CNN%20Layers.md#input-aware-layer)
