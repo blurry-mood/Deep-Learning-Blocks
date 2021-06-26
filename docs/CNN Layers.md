@@ -5,7 +5,8 @@ This layer takes an input tensor (B, C, H, W) and applies conv2d operation to it
 The name comes from the fact that this layer uses customized convolution kernels for each image (or feature map) in the batch. Instead of applying the same kernels for all input images, it uses kernels provided by the Hidden layer (specified below).  
 Thus, it's aware of the input's content.
 
-### **Architecture**:
+### **Architecture**:  
+
 ![InputAware Layer](/docs/imgs/InputAware.png "Architecture of the InputAware Layer.")
 
 * The rectangle with the red dotted border is the Hidden Layer. It generates kernels that are customized for every image in the batch.
@@ -55,14 +56,16 @@ This layer takes an input tensor (B, C, H, W) and applies a conv2d operator usin
 These kernels are horizontally and/or vertically symmetric.
 
 ### **Architecture**:
-* Typically, a 2d convolution kernel is n by m matrix (in the image it's 3 by 7), where each entry is an independant variable, as depicted in the image below:
+* Typically, a 2d convolution kernel is n by m matrix (in the image it's 3 by 7), where each entry is an independant variable, as depicted in the image below:  
+
 ![Flip-Invariant Conv2d Layer](/docs/imgs/FlipConv_std.png "Standard Conv2d kernel.")
 
 * This new conv2d operator enables using kernels with entries repeated in the right and bottom parts of the kernel matrix (as defined by the user).  
 To get a good gist of this kernel, let's ponder for a minute on the two images below.  
 For the first one, the kernel matrix is symmetric with respect to the red column, it's horizontally symmetric.  
-For the second image, the matrix is both horizontally and vertically symmetric.
-![Flip-Invariant Conv2d Layer](/docs/imgs/FlipConv_h.png "Horizontal flip-invariant Conv2d kernel.")
+For the second image, the matrix is both horizontally and vertically symmetric.  
+
+![Flip-Invariant Conv2d Layer](/docs/imgs/FlipConv_h.png "Horizontal flip-invariant Conv2d kernel.")  
 ![Flip-Invariant Conv2d Layer](/docs/imgs/FlipConv_vh.png "Horizontal and vertical flip-invariant Conv2d kernel.")
 * This kernel structure enables making the layer *"almost"* invariant with respect to flipping. The resutling feature maps, after applying this type of convolution on different flipped tensors, are the same if each one is flipped in a certain way (for e.g by making the corner with lowest value in each channel go to the top left corner, all the feature maps are equal). In contrast, the standard convolution doesn't guarantee this property.
 
@@ -88,7 +91,8 @@ For the second image, the matrix is both horizontally and vertically symmetric.
 A block that independently scales channels of an input feature map.  
 The library provides only the Inception-SE module. 
 ### **Architecture**:
-The image below depicts the architecture of SE block as described in the orignal paper (link in *Remarks*).
+The image below depicts the architecture of SE block as described in the orignal paper (link in *Remarks*).  
+
 ![Squeeze-Excitation Block](/docs/imgs/SE_block.png "Squeeze-Excitation Block")
 
 ### **How to use**:
