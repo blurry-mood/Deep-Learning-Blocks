@@ -1,4 +1,5 @@
 DeepBlocks.egg-info
 dist
 build
-tests/__pycache__
+*/__pycache__
+*/*/__pycache__
