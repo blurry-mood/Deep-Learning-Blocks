@@ -8,9 +8,3 @@
   - [ ] Tests
   - [ ] Documentation
   - [ ] Log updates
-
-* Flip-Invariant Conv2d:
-  - [ ] Python code
-  - [ ] Tests
-  - [ ] Documentation
-  - [ ] Log updates
