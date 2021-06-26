@@ -39,8 +39,8 @@ class FReLU(nn.Module):
 
     def forward(self, x):
         ''' Computes the funnel relu activation.
-        Parameter:
-            - z: an input tensor whose shape: [batch, in_channels, H, W]
+        Args:
+            - x: an input tensor whose shape: [batch, in_channels, H, W]
 
         Returns:
             - A tensor whose shape is [batch, in_channels, H, W]

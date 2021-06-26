@@ -21,7 +21,7 @@ class Hidden(nn.Module):
     def __init__(self, in_channels, out_channels, mid_channels, drop_pb, kernel_size: int, use_linear: bool = True):
         ''' Initializes the architectue: conv2d_1 - AdaptiveMaxPool2d - Dropout - conv2d_2 - Optional[Linear_Layer]
 
-        Parameters:
+        Args:
             - in_channels: the number of channels of the input tensor.
             - out_channels: the number of kernels to generate for every tensor in the batch.
             - mid_channels: the number of output channels for conv2d_1.
@@ -49,7 +49,7 @@ class Hidden(nn.Module):
 
     def forward(self, z):
         '''
-        Parameter:
+        Args:
             - z: an input tensor whose shape: [batch, in_channels, H, W]
 
         Returns:
