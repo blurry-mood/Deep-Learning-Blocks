@@ -1,5 +1,4 @@
 ## What's next:
-
 * Bank of kernels Layer:
   - [ ] Use neural turing machine to save kernels
 
@@ -15,6 +14,14 @@
 * Benchmark components:
   - [ ] Study how to benchmark model's (layer, block, network) performance: speed, accuracy, memory effeciency
   - [ ] Alter the notebooks folder with a benchmarking one
+
+* Training framework:
+  - [ ] Implement a class using a GA algorithm that trains a network by training some of its sub-modules at each epoch:
+      - [ ] An individual: sequence of booleans (whether or not to make the corresponding layer trainable)
+      - [ ] Mating, crossover, mutation: Implement the standard GA operators.
+      - [ ] Fitness: inverse (or minus) the *VALIDATION* loss.
+      - [ ] 1 Generation == 1 Epoch.
+      - [ ] Benchmark by comparing this training strategy with standard training by preserving the same model.
 
 ## Update package in Pypi:
 > python3 setup.py sdist bdist_wheel
