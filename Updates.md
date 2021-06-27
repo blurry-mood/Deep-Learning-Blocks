@@ -1,4 +1,7 @@
-## June 25, 2021:
+## June 27, 2021:
+* Tuple value for 'kernel_size' and bias term for the last conv2d in IA layer are now supported.
+
+## June 26, 2021:
 * Alter import statements in deepblocks/__init__.py
 * Add **Squeeze-Excitation** block, with its tests and documentation.
 
