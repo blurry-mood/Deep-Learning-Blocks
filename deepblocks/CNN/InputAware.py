@@ -33,12 +33,6 @@ class Hidden(nn.Module):
         '''
         super().__init__()
 
-        # Make 'kernel_size' a tuple of two ints
-        if isinstance(kernel_size, int):
-            kernel_size = (kernel_size, kernel_size)
-        if len(kernel_size) == 1:
-            kernel_size = (kernel_size[0], kernel_size[0])
-
         # Model definition
         self.conv_block = nn.Sequential(
             nn.Conv2d(in_channels, mid_channels, 3, stride=1, padding=1),
@@ -95,12 +89,21 @@ class ConvBlock(nn.Module):
         '''
         super().__init__()
 
+        # Make 'kernel_size' a tuple of two ints
+        if isinstance(kernel_size, int):
+            kernel_size = (kernel_size, kernel_size)
+        if len(kernel_size) == 1:
+            kernel_size = (kernel_size[0], kernel_size[0])
+
+        # Check the parity of 'kernel_size'
+        assert torch.tensor(kernel_size).prod()%2==1, f'The kernel size must be an odd number {kernel_size=}'
+
         self.in_channels, self.out_channels = in_channels, out_channels
         self.stride, self.padding = stride, padding
         self.hidden = Hidden(in_channels, in_channels*out_channels, mid_channels,
                              drop_pb, kernel_size,
                              use_linear=use_linear)
-        # self.bias = nn.Parameter(torch.randn(out_channels))
+        self.bias = nn.Parameter(torch.randn(out_channels))
 
     def forward(self, x):
         '''
@@ -114,6 +117,9 @@ class ConvBlock(nn.Module):
         batch = x.size(0)
         kernels = self.hidden(x)
 
+        # The bias isn't input-sensitive, it's shared among all inputs.
+        bias = self.bias.repeat(batch)
+
         # Reshape a batch of feature maps to be an image with a looot of channels (batch x in_channels)
         x = x.flatten(0, 1).unsqueeze(0)
 
@@ -125,6 +131,6 @@ class ConvBlock(nn.Module):
         # Apply 2d Conv in an image-wise manner, first in_channels kernels applied to first images,
         # 2nd kernels to 2nd image, etc.
         # Then separate the out_channels of each image, yielding a batch dimension.
-        z = F.conv2d(x, kernels, bias=None, padding=self.padding, stride=self.stride, groups=batch).unflatten(
+        z = F.conv2d(x, kernels, bias=bias, padding=self.padding, stride=self.stride, groups=batch).unflatten(
             1, (batch, self.out_channels)).squeeze(0)
         return z
