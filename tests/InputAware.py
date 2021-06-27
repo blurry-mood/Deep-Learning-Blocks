@@ -7,31 +7,34 @@ from torch.optim import Adam
 
 import unittest
 
-class TestHidden(unittest.TestCase):    
+
+class TestHidden(unittest.TestCase):
 
     def test_forward(self):
         N = 2
-        for in_channels, width, height in torch.randint(low = 1, high=50, size=(N,3)).tolist():
-            for out_channels, mid_channels, kernel_size in torch.randint(low = 1, high=50, size=(N,3)).tolist():
-                
+        for in_channels, width, height in torch.randint(low=1, high=50, size=(N, 3)).tolist():
+            for out_channels, mid_channels, kernel_size in torch.randint(low=1, high=50, size=(N, 3)).tolist():
+
                 # Predict the value of a tensor
-                hidden = Hidden(in_channels, out_channels, mid_channels, .1, kernel_size)
+                hidden = Hidden(in_channels, out_channels,
+                                mid_channels, .1, (kernel_size, kernel_size))
                 test = torch.rand(4, in_channels, height, width)
                 y = hidden(test)
-                
+
                 # Validate the output shape
-                self.assertEqual(tuple(y.shape), (4, out_channels,kernel_size,kernel_size))
+                self.assertEqual(
+                    tuple(y.shape), (4, out_channels, kernel_size, kernel_size))
                 del test, y, hidden
 
-    def test_backword(self):
+    def test_backward(self):
         N = 2
         for in_channels, width, height in torch.randint(low = 1, high=50, size=(N,3)).tolist():
             for out_channels, mid_channels, kernel_size in torch.randint(low = 1, high=50, size=(N,3)).tolist():
-                
+
                 # Init model & optimizer
-                hidden = Hidden(in_channels, out_channels, mid_channels, .1, kernel_size)
+                hidden = Hidden(in_channels, out_channels, mid_channels, .1, (kernel_size, kernel_size))
                 opt = Adam(hidden.parameters(), lr=1e-4)
-                
+
                 # Predict the value of one tensor
                 test = torch.rand(4, in_channels, height, width)
                 y = hidden(test)
@@ -40,44 +43,48 @@ class TestHidden(unittest.TestCase):
                 cost = torch.sum(torch.abs(y))
                 cost.backward()
                 opt.step()
-                
+
                 del test, y, hidden, cost, opt
 
-class TestConvBlock(unittest.TestCase):    
+
+class TestConvBlock(unittest.TestCase):
 
     def test_forward(self):
         N = 2
-        for in_channels, width, height in torch.randint(low = 1, high=50, size=(N,3)).tolist():
-            for out_channels, mid_channels, kernel_size in torch.randint(low = 1, high=50, size=(N,3)).tolist():
-                
+        for in_channels, *_ in torch.randint(low=1, high=10, size=(N, 3)).tolist():
+            for out_channels, mid_channels, kernel_size in torch.randint(low=1, high=10, size=(N, 3)).tolist():
+
                 # Predict the value of a tensor
-                hidden = ConvBlock(in_channels, out_channels, mid_channels, .1, kernel_size)
-                test = torch.rand(4, in_channels, height, width)
-                y = hidden(test)
-                
+                conv = ConvBlock(in_channels, out_channels,
+                                   mid_channels, .1, kernel_size, padding=kernel_size//2)
+                test = torch.rand(4, in_channels, 100, 100)
+                y = conv(test)
+
                 # Validate the output shape
-                self.assertEqual(tuple(y.shape), (4, out_channels,kernel_size,kernel_size))
-                del test, y, hidden
+                self.assertEqual(
+                    tuple(y.shape), (4, out_channels, 100, 100, kernel_size))
+                del test, y, conv
 
-    def test_backword(self):
-        N = 2
-        for in_channels, width, height in torch.randint(low = 1, high=50, size=(N,3)).tolist():
-            for out_channels, mid_channels, kernel_size in torch.randint(low = 1, high=50, size=(N,3)).tolist():
-                
-                # Init model & optimizer
-                hidden = ConvBlock(in_channels, out_channels, mid_channels, .1, kernel_size)
-                opt = Adam(hidden.parameters(), lr=1e-4)
-                
-                # Predict the value of one tensor
-                test = torch.rand(4, in_channels, height, width)
-                y = hidden(test)
+    # def test_backward(self):
+    #     N = 2
+    #     for in_channels, width, height in torch.randint(low = 1, high=50, size=(N,3)).tolist():
+    #         for out_channels, mid_channels, kernel_size in torch.randint(low = 1, high=50, size=(N,3)).tolist():
 
-                # Backpropagate one step
-                cost = torch.sum(torch.abs(y))
-                cost.backward()
-                opt.step()
-                
-                del test, y, hidden, cost, opt
+    #             # Init model & optimizer
+    #             hidden = ConvBlock(in_channels, out_channels, mid_channels, .1, kernel_size)
+    #             opt = Adam(hidden.parameters(), lr=1e-4)
+
+    #             # Predict the value of one tensor
+    #             test = torch.rand(4, in_channels, height, width)
+    #             y = hidden(test)
+
+    #             # Backpropagate one step
+    #             cost = torch.sum(torch.abs(y))
+    #             cost.backward()
+    #             opt.step()
+
+    #             del test, y, hidden, cost, opt
+
 
 if __name__ == '__main__':
     unittest.main()
