@@ -3,7 +3,6 @@
   - [ ] Use neural turing machine to save kernels
 
 * Loss funcs:
-  - [ ] Inverse sigmoid
   - [ ] sinus function
   
 * Object detector network:
