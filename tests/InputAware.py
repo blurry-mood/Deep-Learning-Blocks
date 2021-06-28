@@ -1,14 +1,11 @@
 ''' Test the initialization, forward and backward propagation of 
-    both Hidden & ConvBlock.
+    both Hidden & InputAware.
 '''
-from deepblocks.CNN.InputAware import Hidden, ConvBlock
+from deepblocks import InputAware
 import torch
 from torch.optim import Adam
 
 import unittest
-
-
-
 
 class TestConvBlock(unittest.TestCase):
 
@@ -18,7 +15,7 @@ class TestConvBlock(unittest.TestCase):
             for out_channels, mid_channels, kernel_size in torch.randint(low=1, high=10, size=(N, 3)).tolist():
                 print(in_channels, out_channels, mid_channels, kernel_size,)
                 # Predict the value of a tensor
-                conv = ConvBlock(in_channels, out_channels,
+                conv = InputAware(in_channels, out_channels,
                                    mid_channels, .1, kernel_size, padding=kernel_size//2)
                 test = torch.rand(4, in_channels, 30, 30)
                 y = conv(test)
@@ -34,7 +31,7 @@ class TestConvBlock(unittest.TestCase):
             for out_channels, mid_channels, kernel_size in torch.randint(low = 1, high=50, size=(N,3)).tolist():
 
                 # Init model & optimizer
-                hidden = ConvBlock(in_channels, out_channels, mid_channels, .1, kernel_size)
+                hidden = InputAware(in_channels, out_channels, mid_channels, .1, kernel_size)
                 opt = Adam(hidden.parameters(), lr=1e-4)
 
                 # Predict the value of one tensor
