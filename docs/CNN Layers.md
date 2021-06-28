@@ -1,5 +1,4 @@
-=============================================================
-## **Input Aware Layer**
+# **Input Aware Layer**
 This layer takes an input tensor (B, C, H, W) and applies conv2d operation to it, but with different kernels for every sample in the batch.
 
 The name comes from the fact that this layer uses customized convolution kernels for each image (or feature map) in the batch. Instead of applying the same kernels for all input images, it uses kernels provided by the Hidden layer (specified below).  
@@ -27,8 +26,7 @@ Thus, it's aware of the input's content.
 ### **Remarks**:
 * When tested on MNIST, it converges really fast compared to a vanilla CNN, in 1 epoch the former reaches a validation CELoss of 0.07 while the latter reaches 0.7 for CNN by then.
 
-=============================================================
-## **Funnel ReLU (FReLU)**
+# **Funnel ReLU (FReLU)**
 This layer takes an input tensor I = (B, C, H, W), applies a spatial transformation O = (B, C, H, W), then returns the maximum value between I and O in an element-wise way.
 
 ### **Formula**:
@@ -50,8 +48,8 @@ Please note that *p* a window of *learnable* parameters, and it is shared in the
 * For more insights, check the original paper: [Funnel Activation for Visual Recognition
 ](https://arxiv.org/abs/2007.11824)
 
-=============================================================
-## **Flip-Invariant Conv2d Layer**
+
+# **Flip-Invariant Conv2d Layer**
 This layer takes an input tensor (B, C, H, W) and applies a conv2d operator using special kernels.  
 These kernels are horizontally and/or vertically symmetric.
 
@@ -86,8 +84,7 @@ For the second image, the matrix is both horizontally and vertically symmetric.
 * Depending on the values of `h_invariant & v_invariant`, this layer reduces the number of parameters by almost 4 times.
 
 
-=============================================================
-## **Squeeze-Excitation Block**
+# **Squeeze-Excitation Block**
 A block that independently scales channels of an input feature map.  
 The library provides only the Inception-SE module. 
 ### **Architecture**:
