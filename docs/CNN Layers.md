@@ -15,10 +15,10 @@ Thus, it's aware of the input's content.
 
 ### **How to use**:
 1- Import ConvBlock:
-> from deepblocks import InputAwareConv2d
+> from deepblocks import InputAware
 
 2- Create an instance:
->  ia_conv = InputAwareConv2d(in_channels, out_channels, mid_channels, drop_pb, kernel_size, use_linear)
+>  ia_conv = InputAware(in_channels, out_channels, mid_channels, drop_pb, kernel_size, use_linear)
 * `mid_channels`: the number of output channels after applying the first conv2d layer in the Hidden layer.
 * `use_linear`: if True, Linears is applied to the set of kernels.
 * `kernel_size`: the desired size of the kernels to apply to the input tensor.
