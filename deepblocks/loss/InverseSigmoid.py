@@ -1,5 +1,5 @@
 ''' Implementation of loss function that's similar to the inverse of the sigmoid function.
-It could be used instead of CrossEntropy loss function.
+    It could be used instead of CrossEntropy loss function.
 '''
 
 from typing import Optional
@@ -19,9 +19,8 @@ def invsig_loss(y:torch.Tensor, inds:torch.Tensor, alpha:float, beta:float, gamm
         return y.mean()
     return y
 
-
 class InverseSigmoid(nn.Module):
-
+    
     def __init__(self, alpha: float = .9, beta: float = .043, reduction:Optional[str]='mean'):
         ''' Initialisation of the loss function.
             The formula is :
