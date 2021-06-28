@@ -10,10 +10,6 @@
   - [ ] Implement an object detector where the label is a mask with white object boundaries
   - [ ] Implement a method to separate the boxes from the mask
   - [ ] Train the model on multiple tasks: label containing the whole object, convolved object...
-  
-* Benchmark components:
-  - [ ] Study how to benchmark model's (layer, block, network) performance: speed, accuracy, memory effeciency
-  - [ ] Alter the notebooks folder with a benchmarking one
 
 * Training framework:
   - [ ] Implement a class using a GA algorithm that trains a network by training some of its sub-modules at each epoch:
