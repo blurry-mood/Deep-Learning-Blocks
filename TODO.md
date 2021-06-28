@@ -1,9 +1,6 @@
 ## What's next:
 * Bank of kernels Layer:
   - [ ] Use neural turing machine to save kernels
-
-* Loss funcs:
-  - [ ] sinus function
   
 * Object detector network:
   - [ ] Implement an object detector where the label is a mask with white object boundaries
