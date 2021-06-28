@@ -8,14 +8,11 @@ import torch
 from torch import nn
 from torch.nn.functional import nll_loss, softmax
 
-HALF_PI = pi/2
-
-
 @torch.jit.script
-def cosine_loss(y: torch.Tensor, inds: torch.Tensor, alpha: float, beta: float, gamma: float, reduction: str):
+def cosine_loss(y: torch.Tensor, inds: torch.Tensor, alpha: float, beta: float, gamma: float, reduction: str, pi:float=pi):
     y = softmax(y, dim=1)
     y = - nll_loss(y, inds, reduction='none')
-    y = torch.cos(HALF_PI * alpha * y + beta) + gamma
+    y = torch.cos(pi/2 * alpha * y + beta) + gamma
 
     if reduction == 'sum':
         return y.sum()
@@ -41,15 +38,15 @@ class Cosine(nn.Module):
         '''
         super().__init__()
 
-        assert alpha > 0 and beta > 0 and beta <= pi * \
-            (1 - alpha /
-             2), f'Make sure: {alpha=}>0, {beta=}>0, and {beta=}<{pi*(1-alpha/2)=} '
+        # assert alpha > 0 and beta > 0 and beta <= pi * \
+        #     (1 - alpha /
+        #      2), f'Make sure: {alpha=}>0, {beta=}>0, and {beta=}<{pi*(1-alpha/2)=} '
 
         self.reduction = reduction
         self.alpha = alpha
         self.beta = beta
         # Assert loss(1)==0
-        self.gamma = - cos(HALF_PI * alpha + beta)
+        self.gamma = - cos(pi/2 * alpha + beta)
 
     def forward(self, y: torch.Tensor, inds: torch.Tensor):
         ''' Compute the inverse sigmoid loss function
