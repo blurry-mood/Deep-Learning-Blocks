@@ -1,3 +1,6 @@
+## June 28, 2021:
+*  Implement & document InverseSigmoid loss.
+
 ## June 27, 2021:
 * Tuple value for 'kernel_size' and bias term for the last conv2d in IA layer are now supported.
 
