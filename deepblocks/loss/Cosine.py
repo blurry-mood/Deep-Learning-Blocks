@@ -24,7 +24,7 @@ def cosine_loss(y: torch.Tensor, inds: torch.Tensor, alpha: float, beta: float, 
     return y
 
 
-class CosineLoss(nn.Module):
+class Cosine(nn.Module):
 
     def __init__(self, alpha: float = .9, beta: float = 1., reduction: Optional[str] = 'mean'):
         ''' Initialisation of the loss function.
