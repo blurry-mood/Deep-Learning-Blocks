@@ -153,6 +153,17 @@ class GA:
     def run(self, n_generations):
         with tqdm(total=n_generations) as pbar:
             for _ in range(n_generations):
+                
+                # Replace duplicates
+                n = 1
+                while n > 0:
+                    n = len(self.individuals)
+                    set_ = set(map(lambda x: tuple(x.solution.tolist()), self.individuals))
+                    n = n - len(set_)
+                    self.individuals = [Individual(solution=torch.BoolTensor(x)) for x in set_]
+                    for _ in range(n):
+                        self.individuals.append(Individual())
+
                 # Save model
                 self._save_models()
 
@@ -169,16 +180,6 @@ class GA:
 
                 # Mutate
                 self._mutate()
-
-                # Replace duplicates
-                n = 1
-                while n > 0:
-                    n = len(self.individuals)
-                    set_ = set(map(lambda x: tuple(x.solution.tolist()), self.individuals))
-                    n = n - len(set_)
-                    self.individuals = [Individual(solution=torch.BoolTensor(x)) for x in set_]
-                    for _ in range(n):
-                        self.individuals.append(Individual())
 
                 pbar.update(1)
                 pbar.set_postfix({'Best loss': 1/best_fitness.item() - 1e-6})
