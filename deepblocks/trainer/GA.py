@@ -1,3 +1,9 @@
+'''
+A genetic algorithm training strategy. It picks which layers to make trainable and 
+which ones to freeze at every epoch (or a predefined number of epochs). 
+This is accomplished by trying different configuration of those layers.
+'''
+
 import numpy as np
 
 import torch
@@ -86,7 +92,20 @@ class GA:
     
 
     def __init__(self, Model, LitModel, model:nn.Module, modules:List[str], dm=None, n_individuals=10, loss:str='test_loss', **kwargs):
+        '''
+        Args:
+            - `Model`: a Python class extending `nn.Module` which is used to create a PyTorch model. The constructor `__init__` must have the option of creating an object without passing any arguments.
+            - `LitModel`: a Python class extending `pl.LightningModule` which is used to create a litModel. The constructor should enable the possibility of creating a litModel by passing only an instance of the aforementioned class.
+            - `model`: an instance of `Model`.
+            - `modules`: A list of strings representing the sub-modules that can be freezed. The state of omitted sub-modules (trainable or not) is retained as it is in the `model` object. Sub-sub-sub... modules could be accessed by join their names with a dot (.), for e.g `mod1.block2.layer5`.
+            - `dm`: a Lightning data module object, it should contain both `train_dataloader` and `test_dataloader`.
+            - `n_individuals`: the number of individuals in the population. Note that it shouldn't exceed the total number of possibilities `2**len(modules)`. Also, this number must be divisible by 4.
+            - `loss`: a string referring to the logged metric storing the test loss value.
+            - `kwargs`: a sequence of arguments that are passed to pl.Trainer class to instantiate the trainer. 
+                Preferably, it should include `max_epochs` which refers to the number epochs each model is trained before estimating its loss. Also, `weights_summary=None, progress_bar_refresh_rate=0` should be passed to avoid printing results of intermediate runs (things get messy).
+        '''
         
+
         assert n_individuals%4==0, 'The number of individuals must be divisible by 4.'
         assert n_individuals<=2**len(modules), f'The number of {n_individuals} can\'t exceed the number of all possibilities {2**len(modules)}'
 
@@ -105,7 +124,14 @@ class GA:
         for i in range(n_individuals):
             self.individuals.append(Individual())
     
-    def warmup(self, epochs):
+    def warmup(self, epochs:int):
+        ''' Train the whole network for a number of 
+        Args: 
+            - epochs: an integer referring for the number of epochs to train the whole layers.
+
+        Returns:
+            - None
+        '''
         _copy = int(self.trainer.max_epochs)*1
         
         # Make all model layers trainable
@@ -151,6 +177,15 @@ class GA:
         self.individuals = population
 
     def run(self, n_generations):
+        '''Optimizes the PyTorch model passed in the constructor, yielding one with a small test loss.
+
+        Args:  
+            - `n_generations`: an integer, the number of generations for the GA algorithm.
+
+        Returns:
+            - `model`: the best resulting PyTorch model minimizing the test loss. Note that sub-modules, which are mentioned in `modules` argument, of the model are all trainable.
+        '''
+
         with tqdm(total=n_generations) as pbar:
             for _ in range(n_generations):
                 
