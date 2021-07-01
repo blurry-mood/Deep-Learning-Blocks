@@ -183,3 +183,9 @@ class GA:
 
                 pbar.update(1)
                 pbar.set_postfix({'Best loss': 1/best_fitness.item() - 1e-6})
+
+         # Enable all layers
+        for param in self.model.parameters():
+            param.requires_grad = True
+
+        return self.model
