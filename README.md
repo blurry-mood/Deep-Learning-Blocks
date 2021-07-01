@@ -11,3 +11,6 @@ A library with customized PyTorch layers and model components.
 ### **Loss Functions**:
 * [Inverse Sigmoid](docs/losses.md#inverse-sigmoid-loss)
 * [Cosine](docs/losses#cosine-loss)
+
+### **Training Strategies**:
+* [GA Trainer](docs/trainer.md#genetic-algorithm-trainer-(ga))
