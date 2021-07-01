@@ -1,3 +1,6 @@
+## July 1, 2021:
+* Implement & document **GA** Trainer.
+
 ## June 28, 2021:
 *  Implement & document **InverseSigmoid** loss.
 *  Implement & document **Cosine** loss.
