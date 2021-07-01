@@ -1,4 +1,11 @@
 ## What's next:
+
+* Benchmarks:
+  - [ ] Compare the GA trainer against the standard strategy on the same model and dataset: time, accuracy, memory.
+  - [ ] Compare the CosineLoss & InverseSigmoidLoss against CrossEntropy on the same model & dataset: convergence rate, final training & test losses. 
+  - [ ] Compare FlipConv2d layer against vanilla nn.Conv2d on a dataset of flip-invariant images: convergence rate, and performance.
+
+
 * Bank of kernels Layer:
   - [ ] Use neural turing machine to save kernels
   
