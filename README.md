@@ -13,4 +13,4 @@ A library with customized PyTorch layers and model components.
 * [Cosine](docs/losses#cosine-loss)
 
 ### **Training Strategies**:
-* [GA Trainer](docs/trainer.md#genetic-algorithm-trainer-(ga))
+* [GA Trainer](docs/trainer.md#genetic-algorithm-trainer-ga)
