@@ -185,7 +185,13 @@ class GA:
                 pbar.set_postfix({'Best loss': 1/best_fitness.item() - 1e-6})
 
          # Enable all layers
-        for param in self.model.parameters():
-            param.requires_grad = True
+        for mod in _modules:
+            # Reach out that specific layer
+            mod = [self.model] + mod.split('.')
+            mod = reduce(lambda a, b : getattr(a, b), mod)
+
+            # Disable/Enable the layer
+            for param in mod.parameters():
+                param.requires_grad = True
 
         return self.model
