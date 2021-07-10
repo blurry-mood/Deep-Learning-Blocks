@@ -18,7 +18,7 @@ class SE(nn.Module):
         '''
         super().__init__()
 
-        assert in_channels >= ratio, f'{in_channels=} should be greater than (or equal to) {ratio=}.'
+        assert in_channels >= ratio, f'{in_channels} should be greater than (or equal to) {ratio}.'
 
         self.se = nn.Sequential(
             nn.AdaptiveAvgPool2d(1),

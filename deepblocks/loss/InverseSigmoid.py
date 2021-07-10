@@ -36,7 +36,7 @@ class InverseSigmoid(nn.Module):
         '''
         super().__init__()
 
-        assert alpha>0 and beta>0 and alpha+beta<1, f'Make sure: {alpha=}>0, {beta=}>0, and {alpha+beta=}<1 '
+        # assert alpha>0 and beta>0 and alpha+beta<1, f'Make sure: {alpha=}>0, {beta=}>0, and {alpha+beta=}<1 '
 
         self.reduction = reduction
         self.alpha = alpha

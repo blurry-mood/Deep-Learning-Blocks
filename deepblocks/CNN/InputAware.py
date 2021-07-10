@@ -96,7 +96,7 @@ class InputAware(nn.Module):
             kernel_size = (kernel_size[0], kernel_size[0])
 
         # Check the parity of 'kernel_size'
-        assert torch.tensor(kernel_size).prod()%2==1, f'The kernel size must be an odd number {kernel_size=}'
+        assert torch.tensor(kernel_size).prod()%2==1, f'The kernel size must be an odd number {kernel_size}'
 
         self.in_channels, self.out_channels = in_channels, out_channels
         self.stride, self.padding = stride, padding
