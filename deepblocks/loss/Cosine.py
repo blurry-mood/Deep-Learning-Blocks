@@ -23,7 +23,7 @@ def cosine_loss(y: torch.Tensor, inds: torch.Tensor, alpha: float, beta: float, 
 
 class Cosine(nn.Module):
 
-    def __init__(self, alpha: float = .9, beta: float = 1., reduction: Optional[str] = 'mean'):
+    def __init__(self, alpha: float = .9, beta: float = 1.7, reduction: Optional[str] = 'mean'):
         ''' Initialisation of the loss function.
             The formula is :
                 loss = torch.cos(HALF_PI * alpha * y + beta) + gamma
