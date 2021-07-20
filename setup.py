@@ -15,7 +15,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 exec(open('deepblocks/version.py').read())
 
 setup(
-    name='DeepBlocks',
+    name='deepblocks',
     version=__version__,
     author='Ayoub Assis',
     author_email='assis.ayoub@gmail.com',
