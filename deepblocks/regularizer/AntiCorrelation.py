@@ -13,7 +13,7 @@ class AntiCorrelation(nn.Module):
             (i.e off-diagonal sum multiplied by lambda).
 
         Args:
-            - p: Float in [0, 1] denoting the probability of computing the loss with respect to a each tensor in the list.
+            - p: Float in [0, 1] denoting the probability of computing the loss with respect to a tensor in the list (to reduce computation).
             - lmd: Float mutliplying the off-diagonal sum before adding the diagonal sum: diag_sum + lmd * off_diag_sum
         """
         super().__init__()
