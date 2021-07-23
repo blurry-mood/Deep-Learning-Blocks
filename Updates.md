@@ -1,5 +1,11 @@
+## July 23, 2021:
+* Implement **Barlow Twin** self-supervised framework.
+* Implement **Dino** self-supervised framework.
+* Implement **AntiCorrelation** regularizer module.
+
 ## July 1, 2021:
 * Implement & document **GA** Trainer.
+
 
 ## June 28, 2021:
 *  Implement & document **InverseSigmoid** loss.
