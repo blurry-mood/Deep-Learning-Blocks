@@ -37,12 +37,12 @@ class _Model(nn.Module):
         self.trfms = nn.Sequential(*transforms)
 
     def forward(self, x):
-        xx = []
-        for _ in range(2):
-            _x = self.trfms(x)
+        xx = [x, self.trfms(x)]
+        for i in range(2):
+            _x = xx[i]
             _x = self.model(_x)
             _x = (_x - _x.mean(0))/_x.std(0)
-            xx.append(_x)
+            xx[i] = _x
 
         return xx
 
@@ -84,8 +84,8 @@ def barlow_twin(model: nn.Module, transforms: List, dataloader: Union[DataLoader
 
     Args:
         - model: PyTorch module that returns an Matrix output whose shape is [batch, D]; D could be any integer larger than 0.
-        - transforms: List of torchvision scriptible transforms (working with tensors not PIL images). It's used to generate two distorted versions 
-                    of the original image.
+        - transforms: List of torchvision scriptible transforms (working with tensors not PIL images). It's used to generate one distorted version 
+                    of the original image, the other version is the orginal image itself.
         - dataloader: A PyTorch DataLoader or a Pytorch-Lightning DataModule. 
                         The retrived batch at each step must contain only the input without any additional tensors.
         - lmd: The lambda parameter in the original paper.
