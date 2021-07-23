@@ -87,7 +87,7 @@ def barlow_twin(model: nn.Module, transforms: List, dataloader: Union[DataLoader
         - transforms: List of torchvision scriptible transforms (working with tensors not PIL images). It's used to generate one distorted version 
                     of the original image, the other version is the orginal image itself.
         - dataloader: A PyTorch DataLoader or a Pytorch-Lightning DataModule. 
-                        The retrived batch at each step must contain only the input without any additional tensors.
+                        The retrieved batch at each step must contain only the input without any additional tensors.
         - lmd: The lambda parameter in the original paper.
         - opt: String referring to the desired optimizer to be used. 
                 These are the supported ones: [Adam, AdamW, SGD, RMSprop, Adagrad], 
