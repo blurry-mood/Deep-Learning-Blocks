@@ -1,2 +1,1 @@
-from .InverseSigmoid import InverseSigmoid
-from .Cosine import Cosine
+from .FocalLoss import FocalLoss

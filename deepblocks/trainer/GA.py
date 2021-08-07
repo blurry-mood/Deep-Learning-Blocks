@@ -95,7 +95,7 @@ class GA:
         '''
         Args:
             - `Model`: a Python class extending `nn.Module` which is used to create a PyTorch model. The constructor `__init__` must have the option of creating an object without passing any arguments.
-            - `LitModel`: a Python class extending `pl.LightningModule` which is used to create a litModel. The constructor should enable the possibility of creating a litModel by passing only an instance of the aforementioned class.
+            - `LitModel`: a Python class extending `pl.LightningModule` which is used to create a litModel. The constructor should enable the possibility of creating a litModel by passing only an instance of the aforementioned argument.
             - `model`: an instance of `Model`.
             - `modules`: A list of strings representing the sub-modules that can be freezed. The state of omitted sub-modules (trainable or not) is retained as it is in the `model` object. Sub-sub-sub... modules could be accessed by join their names with a dot (.), for e.g `mod1.block2.layer5`.
             - `dm`: a Lightning data module object, it should contain both `train_dataloader` and `test_dataloader`.

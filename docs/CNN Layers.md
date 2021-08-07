@@ -1,30 +1,3 @@
-# **Input Aware Layer**
-This layer takes an input tensor (B, C, H, W) and applies conv2d operation to it, but with different kernels for every sample in the batch.
-
-The name comes from the fact that this layer uses customized convolution kernels for each image (or feature map) in the batch. Instead of applying the same kernels for all input images, it uses kernels provided by the Hidden layer (specified below).  
-Thus, it's aware of the input's content.
-
-### **Architecture**:  
-
-![InputAware Layer](/docs/imgs/InputAware.png "Architecture of the InputAware Layer.")
-
-* The rectangle with the red dotted border is the Hidden Layer. It generates kernels that are customized for every image in the batch.
-* The rectangle with the green solid border is the ConvBlock Layer. It takes as input a tensor with `in_channels` channels, and returns a tensor with `out_channels`.
-* The Linears is an optional layer. If used, it applies a linear transformation to each kernel (for each kernel there is a independant Linear Layer) and returns a new kernel with the same shape.
-
-### **How to use**:
-1- Import ConvBlock:
-> from deepblocks import InputAware
-
-2- Create an instance:
->  ia_conv = InputAware(in_channels, out_channels, mid_channels, drop_pb, kernel_size, use_linear)
-* `mid_channels`: the number of output channels after applying the first conv2d layer in the Hidden layer.
-* `use_linear`: if True, Linears is applied to the set of kernels.
-* `kernel_size`: the desired size of the kernels to apply to the input tensor.
-* `drop_pb`: the probability assfociated with the Dropout layer.
-
-### **Remarks**:
-* When tested on MNIST, it converges really fast compared to a vanilla CNN, in 1 epoch the former reaches a validation CELoss of 0.07 while the latter reaches 0.7 for CNN by then.
 
 # **Funnel ReLU (FReLU)**
 This layer takes an input tensor I = (B, C, H, W), applies a spatial transformation O = (B, C, H, W), then returns the maximum value between I and O in an element-wise way.
@@ -76,7 +49,7 @@ For the second image, the matrix is both horizontally and vertically symmetric.
 >  flip_conv = FlipConv2d(h_invariant: bool = True, v_invariant: bool = True, **kwargs)
 * `h_invariant`: If true, the kernels are horizonatally symmetrical.
 * `v_invariant`: If true, the kernels are vertically symmetrical.
-* `kwargs`: Arguments used for the standard nn.Conv2d layer.
+* `**kwargs`: Arguments used for the standard nn.Conv2d layer.
   
 ### **Remarks**:
 * This layer is useful when the input image of a model is always is invariant to flipping.

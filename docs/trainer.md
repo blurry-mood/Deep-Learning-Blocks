@@ -42,3 +42,4 @@ Preferably, it should include `max_epochs` which refers to the number epochs eac
 
 ### **Remarks**:
 * Currently, the GA trainer doesn't preserve the state of layers not mentioned in `modules`.
+* 
