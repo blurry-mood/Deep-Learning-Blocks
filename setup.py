@@ -12,6 +12,18 @@ with open(path.join(here, 'requirements.txt')) as f:
 with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
+n = len('https://github.com/blurry-mood/Deep-Learning-Blocks/blob/main/')
+j = 0
+# Make readme consistent in pypi server
+for _ in range(len(long_description)-6):
+    if long_description[j:j+5] == 'docs/':
+        long_description = long_description[:j] + 'https://github.com/blurry-mood/Deep-Learning-Blocks/blob/main/' + long_description[j:]
+        j += n
+        print(j)
+    j+=1
+
+print(long_description)
+
 exec(open('deepblocks/version.py').read())
 
 setup(
