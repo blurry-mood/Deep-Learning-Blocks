@@ -1,6 +1,6 @@
-'''
+"""
 FlipConv2d is a special Conv2d layer whose result is invariant against horizontal & vertical flipping
-'''
+"""
 
 import torch
 from torch import nn
@@ -8,7 +8,18 @@ from torch.nn.functional import conv2d
 
 
 class FlipConv2d(nn.Module):
+    """ FlipConv2d is special case of the standard nn.Conv2d. They differs in the kernal structure.
+    This kernel structure enables making the layer "invariant" with respect to flipping. 
 
+    Args:
+        - h_invariant: If true, the kernels are horizonatally symmetrical.
+        - v_invariant: If true, the kernels are vertically symmetrical.
+        - **kwargs: Arguments used for the standard nn.Conv2d layer.
+
+    Forward:
+        - x (Tensor): its shape is [B, C, H, W]
+
+    """
     def __init__(self, h_invariant: bool = True, v_invariant: bool = True, **kwargs):
         super().__init__()
 
@@ -42,12 +53,13 @@ class FlipConv2d(nn.Module):
             kernel_size = (kernel_size[0]//2+1, kernel_size[1])
 
         # Register the model paramters: bias & kernel weights
-        self.bias = nn.Parameter(3*torch.randn(out_channels))
-        self.kernel = nn.Parameter(
-            3*torch.randn(out_channels, in_channels//groups, kernel_size[0], kernel_size[1]))
+        self.bias = None if not kwargs.pop('bias', False) else nn.Parameter(torch.randn(out_channels))
+        self._kernel = nn.Parameter(
+            torch.randn(out_channels, in_channels//groups, kernel_size[0], kernel_size[1]))
 
-    def forward(self, x):
-        kernel = self.kernel
+    @property
+    def kernel(self):
+        kernel = self._kernel
 
         # Flip the kernel vertically
         if self.v_invariant:
@@ -58,5 +70,10 @@ class FlipConv2d(nn.Module):
         if self.h_invariant:
             h_inds = torch.arange(start=kernel.size(-1)-2, end=-1, step=-1)
             kernel = torch.cat((kernel, kernel[..., h_inds]), axis=-1)
+
+        return kernel
+
+    def forward(self, x):
+        kernel = self.kernel
 
         return conv2d(x, kernel, bias=self.bias, **self.kwargs)
