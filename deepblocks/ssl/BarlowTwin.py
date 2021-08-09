@@ -94,6 +94,9 @@ def barlow_twin(model: nn.Module, transforms: List, dataloader: Union[DataLoader
                 otherwise, AdamW is used by default.
         - opt_kwargs: Dictionary of optimizer configuration.
         - trainer_kwargs: Sequence of Pytorch-Lightning Trainer configuration. For e.g: max_epochs=8, gpus=-1, ...
+
+    Returns:
+        - pretrained: The resulting pre-trained model.
     """
 
 
@@ -101,3 +104,5 @@ def barlow_twin(model: nn.Module, transforms: List, dataloader: Union[DataLoader
     litmodel = _LitModel(model, lmd, opt, opt_kwargs)
     trainer = Trainer(**trainer_kwargs)
     trainer.fit(litmodel, dataloader)
+
+    return model.model
