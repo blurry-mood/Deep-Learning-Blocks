@@ -47,11 +47,12 @@ def test_gradient_flow():
     x = .1 + torch.rand(1, 1, 32, 32)
     x = [x, vflip(x)]
     x = torch.cat(x)
-    opt = torch.optim.AdamW(conv.parameters(), lr=1e-5)
+    opt = torch.optim.AdamW(conv.parameters(), lr=1e-3)
     _loss = 1e10
-    for i in range(1000):
+    for i in range(1_000):
+        opt.zero_grad()
         y = conv(x).abs().sum()
-        assert y.item() < _loss
+        assert y.item() < _loss + 1
         y.backward()
         opt.step()
         _loss = y.item()
