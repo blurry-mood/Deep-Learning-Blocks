@@ -8,14 +8,14 @@ A library with customized PyTorch layers and model components.
 * [Squeeze-Excitation Block](docs/CNN%20Layers.md#squeeze-excitation-block)  
 
 ### **Loss Functions**:
-* Focal Loss 
+* [Focal Loss](docs/losses.md#focal-loss)
   
 ### **Regularizer**:
-* AntiCorrelation
+* [Anti Correlationr](docs/regularizer.md#anti-correlation)
 
 ### **Self-supervised Learning**:
-* Barlow Twin
-* DINO
+* [Barlow Twin](docs/ssl.md#barlow-twin)
+* [DINO](docs/ssl.md#dino)
 
 ### **Training Strategies**:
 * [GA Trainer](docs/trainer.md#genetic-algorithm-trainer-ga)
