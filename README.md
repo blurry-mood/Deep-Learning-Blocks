@@ -11,7 +11,7 @@ A library with customized PyTorch layers and model components.
 * [Focal Loss](docs/losses.md#focal-loss)
   
 ### **Regularizer**:
-* [Anti Correlationr](docs/regularizer.md#anti-correlation)
+* [Anti Correlation](docs/regularizer.md#anti-correlation)
 
 ### **Self-supervised Learning**:
 * [Barlow Twin](docs/ssl.md#barlow-twin)
@@ -19,3 +19,6 @@ A library with customized PyTorch layers and model components.
 
 ### **Training Strategies**:
 * [GA Trainer](docs/trainer.md#genetic-algorithm-trainer-ga)
+
+## **Optimizers**:
+* SAM
