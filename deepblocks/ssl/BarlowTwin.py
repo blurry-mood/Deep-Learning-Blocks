@@ -20,8 +20,8 @@ def _loss(z1: torch.Tensor, z2: torch.Tensor, lmd: float):
     mm = (mm - torch.eye(D, device=z1.device)).pow(2)
 
     # Extract diagonal & off-diagonal
-    diag = torch.diag(mm)
-    off_diag = (mm - diag)
+    diag = torch.diag(torch.diag(mm))
+    off_diag = mm - diag
 
     diag = diag.sum()
     off_diag = off_diag.sum()
