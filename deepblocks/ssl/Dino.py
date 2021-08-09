@@ -57,7 +57,7 @@ class _Cropper(nn.Module):
         # second global crop
         global_transfo2 = [
             transforms.RandomResizedCrop(224, scale=global_crops_scale,
-                                         interpolation=transforms.InterpolationMode.BICUBIC.BICUBIC),
+                                         interpolation=transforms.InterpolationMode.BICUBIC),
             *_flip_and_color_jitter,
             transforms.RandomApply([transforms.GaussianBlur(5)], p=0.1),
             transforms.RandomSolarize(128, p=0.2),
