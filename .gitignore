@@ -3,3 +3,5 @@ dist
 build
 __pycache__
 lightning_logs
+.vscode
+.pytest_cache
