@@ -26,7 +26,7 @@ def test_break_symmetry():
         opt.step()
         assert (param[1:]-param[:-1]).abs().sum() < 1e-1
 
-    anti = AntiCorrelation(p=1., lmd=0.1)
+    anti = AntiCorrelation(p=1., lmd=1.)
     param = nn.Parameter(torch.ones(3, 4))
     opt = torch.optim.Adam([{'params': param}], lr=1e-1)
     for _ in range(100):
