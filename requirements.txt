@@ -1,5 +1,8 @@
 # Pytorch-lightning
 pytorch-lightning>=1.2.0
 
+# Torch
+torchvision
+
 # Others
 varname
