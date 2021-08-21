@@ -1,13 +1,5 @@
-# Standard libs
-numpy>=1.19.0
-
-# PyTorch
-torch>=1.7.1
-torchvision>=0.8.2
-
-# Pytorch-lightning for notebooks
+# Pytorch-lightning
 pytorch-lightning>=1.2.0
-pytorch-lightning-bolts>=0.3.2
 
 # Others
 varname
