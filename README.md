@@ -21,4 +21,4 @@ A library with customized PyTorch layers and model components.
 * [DINO](docs/ssl.md#dino)
 
 ## **Optimizers**:
-* SAM
+* [SAN](docs/optimizers.md##sharpness-aware-minimization-sam)

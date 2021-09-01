@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 import torch
 from torch import nn
@@ -43,7 +43,6 @@ class SAM(Optimizer):
         self.base_optimizer = base_optimizer(self.param_groups, **kwargs)
         self.param_groups = self.base_optimizer.param_groups
 
-
     @torch.no_grad()
     def first_step(self, zero_grad=True):
         """ Calculate the worst position in the neighborhood.
@@ -67,7 +66,7 @@ class SAM(Optimizer):
                 param.add_(eps)                 # Update position to the worst.
 
         if zero_grad:
-            self.base_optimizer.zero_grad()
+            self.zero_grad()
 
     @torch.no_grad()
     def second_step(self, zero_grad=False):
@@ -84,7 +83,10 @@ class SAM(Optimizer):
         self.base_optimizer.step()      # Change old weights using SAM loss gradient
 
         if zero_grad:
-            self.base_optimizer.zero_grad()
+            self.zero_grad()
+
+    def zero_grad(self, set_to_none: Optional[bool]=False) -> None:
+        return self.base_optimizer.zero_grad(set_to_none)
 
     @torch.no_grad()
     def step(self, closure=None):
@@ -127,7 +129,7 @@ class SAM(Optimizer):
 
     def _grad_norm(self):
         q = self.param_groups[0]['q']
-        # Compute the q-norm of the model gradient but without raising it to **(1/q)
+        # Compute the q-norm of the model gradient but without raising it to: 1/q
         return torch.sum(torch.stack(
                                         [param.grad.pow(q).sum() for group in self.param_groups for param in group['params'] if param.grad is not None]
                                      ))
