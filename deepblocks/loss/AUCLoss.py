@@ -9,21 +9,16 @@ def _binary_loss(x: torch.Tensor, y: torch.Tensor, gamma: float, p: float):
     # x.shape = y.shape = (batch, *dims)
     # y.unique() == (0., 1.)
 
-    # x = torch.sigmoid(x)
+    x = torch.sigmoid(x)
 
-    x, y = x.flatten(1), y.flatten(1)
+    x, y = x.flatten(1), y.flatten(1)   # 1st dim: batch
 
     pos, neg = x*y, x*(1-y)
 
     diff = neg.unsqueeze(1) + gamma - pos.unsqueeze(0)
 
-    # compute mask for diff<gamma
-    mask = diff > 0
-    diff = torch.masked_select(diff, mask)
-    if diff.shape == (0, ):
-        return torch.tensor(0., dtype=torch.float32, requires_grad=True, device=y.device)
-    # compute loss
-    loss = diff.pow(p)
+    # let gradient flows when diff>0
+    loss = torch.relu(diff).pow(p)
     return loss
 
 
@@ -31,8 +26,6 @@ class AUCLoss(_Loss):
     """ This loss is an approximation to WilcoxonMann-Whitney (WMW) statistic. 
         It's used to directly maximize the Area Under the Curve (AUC) metric. 
         Only the binary classification case is supported by this implementation. 
-        Note that the predictions are used directly in the loss function to avoid vanishing gradients created by the sigmoid activation. 
-        Thus, the choice of `gamma` should be adapted from the one in the original paper
 
         For more details check: https://www.aaai.org/Papers/ICML/2003/ICML03-110.pdf
 
@@ -52,7 +45,7 @@ class AUCLoss(_Loss):
 
     """
 
-    def __init__(self, gamma: float = 1., p: float = 2, reduction: str = 'mean'):
+    def __init__(self, gamma: float = .3, p: float = 2, reduction: str = 'mean'):
         super(AUCLoss, self,).__init__(gamma, p, reduction)
         if gamma < 0:
             raise ValueError(

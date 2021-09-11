@@ -5,18 +5,18 @@ from torchmetrics import AUROC
 
 def test_shapes():
     auc = AUCLoss(gamma=0.01, reduction='none')
-    x = torch.tensor([10, .3, 1, 1]).view(-1, 1)
-    y = torch.tensor([1, 1, 0, 0]).view(-1, 1)
-    assert auc(x, y).shape == (10, )
+    x = torch.randn(10, 3, 4)*4
+    y = torch.randint(0, 2, size=(10, 3, 4))
+    assert auc(x, y).shape == (10, 10, 12)
 
 
 def test_consistency():
     # decrease in loss <=> increase in auroc
     x = torch.nn.Parameter(torch.randn(100, 1))
-    y = torch.randint(0, 2, size=(100,)).view(-1, 1)
-    auc = AUCLoss(gamma=0.1, reduction='mean')
+    y = torch.randint(0, 2, size=(100, 1))
+    auc = AUCLoss(gamma=0.3, p=1.1, reduction='mean')
     auroc = AUROC(pos_label=1, compute_on_step=True)
-    opt = torch.optim.SGD([x], lr=9e-1)
+    opt = torch.optim.SGD([x], lr=1e-2)
 
     _loss = auc(x, y).item()
     _metric = auroc(torch.sigmoid(x), y).item()
@@ -40,7 +40,7 @@ def test_consistency():
 
 def test_homogenous_batch():
     # if all samples belong the same class 
-    auc = AUCLoss(gamma=0.01, reduction='none')
+    auc = AUCLoss(gamma=0.01, reduction='mean')
     x = torch.tensor([10, .3, 1, 1]).view(-1, 1)
     y = torch.tensor([1, 1, 1, 1]).view(-1, 1)
     assert auc(x, y).item() == 0.0
