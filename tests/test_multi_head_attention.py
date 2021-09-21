@@ -1,6 +1,6 @@
 import torch
 from torch import nn
-from deepblocks.layer import MultiHeadAttention
+from deepblocks.layer import MultiHeadAttention, MultiHeadAttentionV2
 
 
 class Attention(nn.Module):
@@ -33,14 +33,14 @@ class Attention(nn.Module):
 
 
 def test_forward_shape():
-    for i in range(1, 30):
-        mha = MultiHeadAttention(10, i, .1)
-        x = torch.rand(11, 21, 10)
-        assert mha(x).shape == (11, 21, 10)
+    for i in range(1, 20):
+        mha = MultiHeadAttention(100, i)
+        x = torch.rand(11, 21, 100)
+        assert mha(x).shape == (11, 21, 100)
 
 
 def test_optimization_against_vanilla():
-    mha = MultiHeadAttention(10, 1, .0)
+    mha = MultiHeadAttentionV2(10, 1)
     vanilla = Attention(10, 1)
     x = torch.rand(11, 21, 10)
     y = torch.randn(11, 21, 10)

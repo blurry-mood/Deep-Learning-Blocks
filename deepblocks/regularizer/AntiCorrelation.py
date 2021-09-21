@@ -35,6 +35,7 @@ class AntiCorrelation(nn.Module):
 
         self.p = p
         self.lmd = lmd
+        self.dummy_param = nn.Parameter(torch.empty(0))
 
     def forward(self, x: List[torch.Tensor]):
         """ """
@@ -45,7 +46,7 @@ class AntiCorrelation(nn.Module):
                 xx.append(t.flatten(1))
 
         if xx == []:
-            return 0
+            return torch.tensor(0, device=self.dummy_param.device)
 
         x = torch.cat(xx, dim=-1)  # N x D
 

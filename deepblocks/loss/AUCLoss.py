@@ -140,7 +140,6 @@ class AUCMarginLoss(_Loss):
         
         self.a = nn.Parameter(torch.randn(1))
         self.b = nn.Parameter(torch.randn(1))
-        self.alpha = nn.Parameter(torch.randn(1))
 
     def forward(self, x, y):
         """ """
@@ -150,7 +149,8 @@ class AUCMarginLoss(_Loss):
         x = torch.sigmoid(x)
 
         # alpha must always be nonnegative
-        p, alpha, a, b, m = self.p, torch.relu(self.alpha), self.a, self.b, self.m
+        p, a, b, m = self.p, self.a, self.b, self.m
+        alpha = torch.relu(1 + b - a)
 
         loss = (1-p)*(x-a).pow(2)*positive
         loss += p*(x-b).pow(2)*negative
