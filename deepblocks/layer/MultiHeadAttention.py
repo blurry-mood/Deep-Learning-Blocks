@@ -11,7 +11,7 @@ Namely:
 
 import torch
 from torch import nn
-
+from math import sqrt
 
 class MultiHeadAttention(nn.Module):
     """ Initializes a Multi-Head Attention module.
@@ -35,24 +35,30 @@ class MultiHeadAttention(nn.Module):
 
     def __init__(self, input_dim:int, num_heads:int=8):
         super().__init__()
+        
+        output_dim = (input_dim//num_heads)*num_heads
         self.num_heads = num_heads
-        head_dim = input_dim // num_heads
-        self.scale = 1/head_dim**0.5
+        self.div = sqrt(output_dim // num_heads)
 
-        self.qkv = nn.Linear(input_dim, input_dim * 3, bias=False)
-        self.proj = nn.Linear(input_dim, input_dim)
+        self.query = nn.Linear(input_dim, output_dim, bias=False)
+        self.key = nn.Linear(input_dim, output_dim, bias=False)
+        self.value = nn.Linear(input_dim, output_dim, bias=False)
+
+        self.proj = nn.Linear(output_dim, input_dim)
 
     def forward(self, x:torch.Tensor):
         """ """
-        B, N, C = x.shape
-        qkv = self.qkv(x).reshape(B, N, 3, self.num_heads, C // self.num_heads).permute(2, 0, 3, 1, 4)
-        q, k, v = qkv[0], qkv[1], qkv[2]
+        B, N, D = x.shape
+        query = self.query(x).reshape(B, N, self.num_heads, D // self.num_heads).permute(0, 2, 1, 3)
+        key = self.query(x).reshape(B, N, self.num_heads, D // self.num_heads).permute(0, 2, 1, 3)
+        value = self.query(x).reshape(B, N, self.num_heads, D // self.num_heads).permute(0, 2, 1, 3)
+        # query.shape = (batch, heads, seq_len, hidden_dim)
 
-        attn = (q @ k.transpose(-2, -1)) * self.scale
-        attn = attn.softmax(dim=-1)
+        weights = (query @ key.transpose(-2, -1)) / self.div
+        weights = weights.softmax(dim=-1) # weights.shape = (batch, heads, hidden_dim, hidden_dim)
 
-        x = (attn @ v).transpose(1, 2).reshape(B, N, C)
-        x = self.proj(x)
+        x = (weights @ value).transpose(1, 2).reshape(B, N, (D // self.num_heads)* self.num_heads) # x.shape = (batch, seq_len, input_dim)
+        x = self.proj(x)    # mix head outputs
         return x
 
 class MultiHeadAttentionV2(nn.Module):
@@ -79,28 +85,27 @@ class MultiHeadAttentionV2(nn.Module):
 
     """
 
-    def __init__(self, input_dim: int, num_heads: int=1):
+    def __init__(self, input_dim:int, num_heads:int=8):
         super().__init__()
-
+        
         self.num_heads = num_heads
-        self.input_dim = input_dim
+        self.div = sqrt(input_dim)
 
-        # the key projection is the identity, thus ommited
-        self.qv = nn.Linear(input_dim, input_dim*2*num_heads, bias=False)
-        self.concat = nn.Linear(input_dim*num_heads, input_dim)
+        self.query = nn.Linear(input_dim, input_dim*num_heads, bias=False)
+        self.value = nn.Linear(input_dim, input_dim*num_heads, bias=False)
+
+        self.proj = nn.Linear(input_dim*num_heads, input_dim)
 
     def forward(self, x:torch.Tensor):
         """ """
-        qv = self.qv(x).unflatten(-1, (self.num_heads,
-                                       self.input_dim, 2)).permute(4, 0, 2, 1, 3)
-        q, v = qv[0], qv[1]
-        alpha = torch.matmul(q, x.transpose(-1, -2).unsqueeze(1))/self.input_dim**.5
-        alpha = torch.softmax(alpha, dim=-1)
+        B, N, D = x.shape
+        query = self.query(x).reshape(B, N, self.num_heads, D).permute(0, 2, 1, 3)
+        value = self.query(x).reshape(B, N, self.num_heads, D).permute(0, 2, 1, 3)
+        # query.shape = (batch, heads, seq_len, D)
 
-        # compute new x
-        x = torch.matmul(alpha, v).transpose(1, 2).flatten(-2)
-        
-        # concatenate from heads
-        x = self.concat(x)
+        weights = (query @ x.transpose(-2, -1).unsqueeze(1)) / self.div
+        weights = weights.softmax(dim=-1) # weights.shape = (batch, heads, hidden_dim, hidden_dim)
 
+        x = (weights @ value).transpose(1, 2).reshape(B, N, D) # x.shape = (batch, seq_len, input_dim)
+        x = self.proj(x)    # mix head outputs
         return x
