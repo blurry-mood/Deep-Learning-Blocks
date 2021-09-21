@@ -1,5 +1,5 @@
 from copy import deepcopy
-from typing import Dict, List, Tuple, Union
+from typing import Dict, Tuple, Union
 
 from pytorch_lightning import LightningModule, Trainer, LightningDataModule
 
@@ -160,29 +160,32 @@ def dino(model: nn.Module, output_dim: int, dataloader: Union[LightningDataModul
          opt: str = 'AdamW', opt_kwargs: Dict = {'lr': 1e-4}, **trainer_kwargs
          ):
     """ Pre-train a model in a self-supervised fashion using DINO framework (Knowledge DIstillation with NO labels).
-        The function clones the given model twice yielding the student & teacher networks, the passed model remains intact.
+
+    The function clones the given model twice yielding the student & teacher networks, the passed model remains intact.
+    
+    Note:
         To get better grasp on this framework, check the original paper: https://arxiv.org/abs/2104.14294 
     
     Args:
-        - model: PyTorch module whose output is a 2D tensor: [batch, output_dim]. 
+        model: PyTorch module whose output is a 2D tensor: [batch, output_dim]. 
                 The model should return a fixed-sized tensor if given images with different sizes: 224 & 96.
-        - output_dim: Integer denoting the last dimension of the model output. 
-        - dataloader: A PyTorch DataLoader or a Pytorch-Lightning DataModule. 
+        output_dim: Integer denoting the last dimension of the model output. 
+        dataloader: A PyTorch DataLoader or a Pytorch-Lightning DataModule. 
                         The retrieved batch, at each step, must contain only the input without any additional tensors.
-        - global_crops_scale: Tuple with two floats in [0, 1], used to crop large patches of the image using torchvision.transforms.RandomResizedCrop .
-        - local_crops_scale: Tuple with two floats in [0, 1], used to crop small patches of image using torchvision.transforms.RandomResizedCrop.
-        - local_crops_number: Integer denoting the number of small patches to use for the student network.
-        - tps, tpt: Floats denoting the temperature used to scale student and teacher outputs respectively.
-        - l: Float used when updating the teacher parameters using the formula: t = l * t + (1 - l) * s.
-        - m: Float used when updating the value of the mean C.
-        - opt: String referring to the desired optimizer to be used. 
+        global_crops_scale: Tuple with two floats in [0, 1], used to crop large patches of the image using torchvision.transforms.RandomResizedCrop .
+        local_crops_scale: Tuple with two floats in [0, 1], used to crop small patches of image using torchvision.transforms.RandomResizedCrop.
+        local_crops_number: Integer denoting the number of small patches to use for the student network.
+        tps, tpt: Floats denoting the temperature used to scale student and teacher outputs respectively.
+        l: Float used when updating the teacher parameters using the formula: t = l * t + (1 - l) * s.
+        m: Float used when updating the value of the mean C.
+        opt: String referring to the desired optimizer to be used. 
                 These are the supported ones: [Adam, AdamW, SGD, RMSprop, Adagrad], 
                 otherwise, AdamW is used by default.
-        - opt_kwargs: Dictionary of optimizer configuration.
-        - trainer_kwargs: Sequence of Pytorch-Lightning Trainer configuration. For e.g: max_epochs=8, gpus=-1, ...
+        opt_kwargs: Dictionary of optimizer configuration.
+        trainer_kwargs: Sequence of Pytorch-Lightning Trainer configuration. For e.g: max_epochs=8, gpus=-1, ...
 
     Returns:
-        - student: The pre-trained student model.
+        The pre-trained student model.
     """
     global _D, _tps, _tpt, _l, _m
 

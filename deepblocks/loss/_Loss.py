@@ -1,3 +1,5 @@
+""" A generic torch module that takes input values passed to constructor and sets them as attributes for the instance.
+"""
 from torch import nn
 from varname import argname2
 

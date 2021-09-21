@@ -1,0 +1,278 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>deepblocks.loss.KLDivLoss module &mdash; 0.1.6</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="deepblocks.optim package" href="deepblocks.optim.html" />
+    <link rel="prev" title="deepblocks.loss.FocalLoss module" href="deepblocks.loss.FocalLoss.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> deepblocks
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="deepblocks.activation.html">deepblocks.activation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deepblocks.layer.html">deepblocks.layer package</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="deepblocks.loss.html">deepblocks.loss package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="deepblocks.loss.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="deepblocks.loss.AUCLoss.html">deepblocks.loss.AUCLoss module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deepblocks.loss.FocalLoss.html">deepblocks.loss.FocalLoss module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">deepblocks.loss.KLDivLoss module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="deepblocks.optim.html">deepblocks.optim package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deepblocks.regularizer.html">deepblocks.regularizer package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deepblocks.ssl.html">deepblocks.ssl package</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">deepblocks</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="deepblocks.loss.html">deepblocks.loss package</a> &raquo;</li>
+        
+      <li>deepblocks.loss.KLDivLoss module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/deepblocks.loss.KLDivLoss.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-deepblocks.loss.KLDivLoss">
+<span id="deepblocks-loss-kldivloss-module"></span><h1>deepblocks.loss.KLDivLoss module<a class="headerlink" href="#module-deepblocks.loss.KLDivLoss" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="deepblocks.loss.KLDivLoss.KLDivLoss">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepblocks.loss.KLDivLoss.</span></span><span class="sig-name descname"><span class="pre">KLDivLoss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduction</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'batchmean'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepblocks.loss.KLDivLoss.KLDivLoss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">deepblocks.loss._Loss._Loss</span></code></p>
+<p>Initialize a nn.Module that computes the Kullback-Leibler divergence loss.</p>
+<p>It takes two logits tensors, transforms them to probabilities using the softmax activation, then computes the loss.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This implementation supports Softmax as a mean to transform logits to probabilities.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>int</em><em>, </em><em>Optional</em>) – The dimension along which Softmax will be computed (so every slice along <cite>dim</cite> will sum to 1),
+for both <cite>x</cite> and <cite>y</cite>. Default is 1.</p></li>
+<li><p><strong>reduction</strong> (<em>str</em><em>, </em><em>Optional</em>) – Specifies the reduction to apply to the output: ‘none’ | ‘batchmean’ | ‘sum’ | ‘mean’.
+‘none’: no reduction will be applied.
+‘batchmean’: the sum of the output will be divided by batchsize.
+‘sum’: the output will be summed.
+‘mean’: the output will be divided by the number of elements in the output.
+Default is ‘batchmean`.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Shape:</dt><dd><ul class="simple">
+<li><p>x (torch.Tensor): Its shape is (N, …). It’s the tensor of logits that is desired to match.</p></li>
+<li><p>y (torch.Tensor): The same shape as x, i.e. (N, …). It’s the tensor of logits that should match the distribution of <cite>x</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepblocks.loss</span> <span class="kn">import</span> <span class="n">KLDivLoss</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kldiv</span> <span class="o">=</span> <span class="n">KLDivLoss</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">33</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">33</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">loss</span> <span class="o">=</span> <span class="n">kldiv</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>  <span class="c1"># loss.shape = ()</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="deepblocks.loss.KLDivLoss.KLDivLoss.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.Tensor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepblocks.loss.KLDivLoss.KLDivLoss.forward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="deepblocks.loss.KLDivLoss.KLDivLoss.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#deepblocks.loss.KLDivLoss.KLDivLoss.training" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="deepblocks.optim.html" class="btn btn-neutral float-right" title="deepblocks.optim package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="deepblocks.loss.FocalLoss.html" class="btn btn-neutral float-left" title="deepblocks.loss.FocalLoss module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Ayoub Assis.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

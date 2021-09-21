@@ -6,6 +6,7 @@ from torch.optim import Optimizer
 
 class SAM(Optimizer):
     """ This file contains an implementation of the Sharpness-Aware Minimization optimization algorithm.
+
     This optimizer is defined with respect to two parameters: 
     - an integer `p` referring to the p-norm used to determine the neighborhood of the model parameters,
     - a float `rho` defining the boundary of the aforementioned neighborhood.
@@ -15,21 +16,34 @@ class SAM(Optimizer):
     2. `second_step`: it computes the gradient at that calculated position, then takes a step.
     **Note**: Before executing the second step, an additional forward-backward propagation pass must be performed.
 
-    Check the original paper at: https://arxiv.org/abs/2010.01412
+    Note:
+        - Check the original paper at: https://arxiv.org/abs/2010.01412
+
+    Args:
+        parameters: List of an nn.Module parameters.  
+        base_optimizer (torch.optim.Optimizer): The class of the optimizer used to update the weights.
+        rho (float, Optional): Non-negative float defining the boundary of the neighborhood. 
+                                Note that using `rho=0` is equivalent to using the bare `base_optimizer`.
+                                Default is 0.1.  
+        p (int, Optional): Positive Integer definining the p-norm.
+                            Default is 2.  
+        **kwargs: additional parameters passed to `base_optimizer` 
+
+    Example:
+        >>> from deepblocks.optim import SAM
+        >>> model = nn.Linear(100, 1)
+        >>> sam = SAM(model.parameters(), torch.optim.SGD, lr=1e-2)
+        >>> x = torch.rand(1000, 100)
+        >>> loss = model(x).abs().mean()
+        >>> sam.zero_grad()
+        >>> loss.backward()
+        >>> sam.first_step(zero_grad=True)
+        >>> model(x).abs().mean().backward()
+        >>> sam.second_step()
     """
     def __init__(self, parameters, base_optimizer:Optimizer, rho:float=0.1, p:int=2, **kwargs):
         """ Initializes the SAM-based optimizer.
 
-        Args:
-            - parameters: List of an nn.Module parameters.
-            - base_optimizer: The class of the optimizer used to update the weights.
-            - rho: Non-negative float defining the boundary of the neighborhood. 
-                    Note that using `rho=0` is equivalent to using the bare base_optimizer.
-            - p: Positive Integer specifiying the p-norm.
-            - **kwargs: additional parameters passed to the base_optimier
-
-        Raises:
-            - ValueError: if p is not positive or rho is negative.
         """
         if p<=0:
             raise ValueError(f'The value of p={p} should be a positive integer')
@@ -48,8 +62,8 @@ class SAM(Optimizer):
         """ Calculate the worst position in the neighborhood.
 
         Args:
-            -zero_grad: Boolean value specifiying whether to zero the gradient after computing the worst position.
-                        By default, the gradients are zeroed.
+            zero_grad (bool, Optional): Boolean value specifiying whether to zero the gradient after computing the worst position.
+                                        Default is True.
         """
         norm = self._grad_norm()    # This norm is not raised to 1/q
 
@@ -70,10 +84,11 @@ class SAM(Optimizer):
 
     @torch.no_grad()
     def second_step(self, zero_grad=False):
-        """ Perform a gradient step
+        """ Perform a gradient step to update model weights.
 
         Args:
-            -zero_grad: Boolean value specifiying whether to zero the gradient after computing the worst position.
+            zero_grad (bool, Optional): Boolean value specifiying whether to zero the gradient after computing the worst position.
+                                        Default is False.
         """
         for group in self.param_groups:
             for param in group['params']:
@@ -93,10 +108,10 @@ class SAM(Optimizer):
         """ Function that performs both phases of SAM.
 
         Args:
-            - closure: Function with no arguments that takes an additional forward & backward propagation steps.
+            closure: Function with no arguments that takes an additional forward & backward propagation steps.
 
         Raises:
-            - ValueError: if a closure function is not passed.
+            ValueError: if a closure function is not passed.
         """
         if closure is None:
             raise ValueError('You must supply a closure function that calculates the loss of the current batch.')
@@ -112,13 +127,13 @@ class SAM(Optimizer):
         """ A useful function that returns a closure function.
 
         Args:
-            - model: PyTorch module.
-            - loss: Loss function taking the predictions of the model and the outputs.
-            - inputs: A List of model inputs. The list is unpacked when passed to the model.
-            - outputs: A list of ground truth values. The list is unpacked when passed to the loss.
+            model (nn.Module): PyTorch module.
+            loss (nn.Module): Loss function taking the predictions of the model and the outputs.
+            inputs (List[torch.Tensor]): A List of model inputs. The list is unpacked when passed to the model.
+            outputs (List[torch.Tensor]): A list of ground truth values. The list is unpacked when passed to the loss.
 
         Returns:
-            - closure: A closure function that is passed to SAM.step(closure=closure)
+            closure (object): A closure function that is passed to SAM.step(closure=closure)
         """
         def _closure():
             preds = model(*inputs)

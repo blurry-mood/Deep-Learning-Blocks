@@ -1,0 +1,352 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>deepblocks.optim.SAM module &mdash; 0.1.6</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="deepblocks.regularizer package" href="deepblocks.regularizer.html" />
+    <link rel="prev" title="deepblocks.optim package" href="deepblocks.optim.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> deepblocks
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="deepblocks.activation.html">deepblocks.activation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deepblocks.layer.html">deepblocks.layer package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deepblocks.loss.html">deepblocks.loss package</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="deepblocks.optim.html">deepblocks.optim package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="deepblocks.optim.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">deepblocks.optim.SAM module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="deepblocks.regularizer.html">deepblocks.regularizer package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deepblocks.ssl.html">deepblocks.ssl package</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">deepblocks</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="deepblocks.optim.html">deepblocks.optim package</a> &raquo;</li>
+        
+      <li>deepblocks.optim.SAM module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/deepblocks.optim.SAM.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-deepblocks.optim.SAM">
+<span id="deepblocks-optim-sam-module"></span><h1>deepblocks.optim.SAM module<a class="headerlink" href="#module-deepblocks.optim.SAM" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="deepblocks.optim.SAM.SAM">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepblocks.optim.SAM.</span></span><span class="sig-name descname"><span class="pre">SAM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_optimizer</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.optim.optimizer.Optimizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepblocks.optim.SAM.SAM" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.optim.optimizer.Optimizer</span></code></p>
+<p>This file contains an implementation of the Sharpness-Aware Minimization optimization algorithm.</p>
+<p>This optimizer is defined with respect to two parameters:
+- an integer <cite>p</cite> referring to the p-norm used to determine the neighborhood of the model parameters,
+- a float <cite>rho</cite> defining the boundary of the aforementioned neighborhood.</p>
+<p>This optimizer, in contrast with standard ones, relies on two phases to perform a single step:
+1. <cite>first_step</cite>: it computes the position having the worst training loss value in the neighborhood,
+2. <cite>second_step</cite>: it computes the gradient at that calculated position, then takes a step.
+<strong>Note</strong>: Before executing the second step, an additional forward-backward propagation pass must be performed.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Check the original paper at: <a class="reference external" href="https://arxiv.org/abs/2010.01412">https://arxiv.org/abs/2010.01412</a></p></li>
+</ul>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parameters</strong> – List of an nn.Module parameters.</p></li>
+<li><p><strong>base_optimizer</strong> (<em>torch.optim.Optimizer</em>) – The class of the optimizer used to update the weights.</p></li>
+<li><p><strong>rho</strong> (<em>float</em><em>, </em><em>Optional</em>) – Non-negative float defining the boundary of the neighborhood.
+Note that using <cite>rho=0</cite> is equivalent to using the bare <cite>base_optimizer</cite>.
+Default is 0.1.</p></li>
+<li><p><strong>p</strong> (<em>int</em><em>, </em><em>Optional</em>) – Positive Integer definining the p-norm.
+Default is 2.</p></li>
+<li><p><strong>**kwargs</strong> – additional parameters passed to <cite>base_optimizer</cite></p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepblocks.optim</span> <span class="kn">import</span> <span class="n">SAM</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sam</span> <span class="o">=</span> <span class="n">SAM</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">loss</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sam</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sam</span><span class="o">.</span><span class="n">first_step</span><span class="p">(</span><span class="n">zero_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sam</span><span class="o">.</span><span class="n">second_step</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="deepblocks.optim.SAM.SAM.closure">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">closure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.nn.modules.module.Module</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.nn.modules.module.Module</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepblocks.optim.SAM.SAM.closure" title="Permalink to this definition">¶</a></dt>
+<dd><p>A useful function that returns a closure function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>nn.Module</em>) – PyTorch module.</p></li>
+<li><p><strong>loss</strong> (<em>nn.Module</em>) – Loss function taking the predictions of the model and the outputs.</p></li>
+<li><p><strong>inputs</strong> (<em>List</em><em>[</em><em>torch.Tensor</em><em>]</em>) – A List of model inputs. The list is unpacked when passed to the model.</p></li>
+<li><p><strong>outputs</strong> (<em>List</em><em>[</em><em>torch.Tensor</em><em>]</em>) – A list of ground truth values. The list is unpacked when passed to the loss.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A closure function that is passed to SAM.step(closure=closure)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>closure (object)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="deepblocks.optim.SAM.SAM.first_step">
+<span class="sig-name descname"><span class="pre">first_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zero_grad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepblocks.optim.SAM.SAM.first_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the worst position in the neighborhood.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>zero_grad</strong> (<em>bool</em><em>, </em><em>Optional</em>) – Boolean value specifiying whether to zero the gradient after computing the worst position.
+Default is True.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="deepblocks.optim.SAM.SAM.second_step">
+<span class="sig-name descname"><span class="pre">second_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zero_grad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepblocks.optim.SAM.SAM.second_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform a gradient step to update model weights.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>zero_grad</strong> (<em>bool</em><em>, </em><em>Optional</em>) – Boolean value specifiying whether to zero the gradient after computing the worst position.
+Default is False.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="deepblocks.optim.SAM.SAM.step">
+<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">closure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepblocks.optim.SAM.SAM.step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function that performs both phases of SAM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>closure</strong> – Function with no arguments that takes an additional forward &amp; backward propagation steps.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError</strong> – if a closure function is not passed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="deepblocks.optim.SAM.SAM.zero_grad">
+<span class="sig-name descname"><span class="pre">zero_grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_to_none</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#deepblocks.optim.SAM.SAM.zero_grad" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the gradients of all optimized <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code> s to zero.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>set_to_none</strong> (<em>bool</em>) – instead of setting to zero, set the grads to None.
+This will in general have lower memory footprint, and can modestly improve performance.
+However, it changes certain behaviors. For example:
+1. When the user tries to access a gradient and perform manual ops on it,
+a None attribute or a Tensor full of 0s will behave differently.
+2. If the user requests <code class="docutils literal notranslate"><span class="pre">zero_grad(set_to_none=True)</span></code> followed by a backward pass, <code class="docutils literal notranslate"><span class="pre">.grad</span></code>s
+are guaranteed to be None for params that did not receive a gradient.
+3. <code class="docutils literal notranslate"><span class="pre">torch.optim</span></code> optimizers have a different behavior if the gradient is 0 or None
+(in one case it does the step with a gradient of 0 and in the other it skips
+the step altogether).</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="deepblocks.regularizer.html" class="btn btn-neutral float-right" title="deepblocks.regularizer package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="deepblocks.optim.html" class="btn btn-neutral float-left" title="deepblocks.optim package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Ayoub Assis.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

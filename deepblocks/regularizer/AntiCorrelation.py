@@ -1,20 +1,33 @@
 from typing import List
 import torch
 from torch import nn
-import numpy as np
 
 class AntiCorrelation(nn.Module):
     """ This module stimulates the network to reduce redundancy in its layers.
-            It takes a list of tensors (produced by network layers) and returns the loss value: (cross-correlation matrix - Identity)**2
-            It uses the parameter lambda to tradeoff between, the sum of the diagonal and off-diagonal of the latter matrix.
-            (i.e off-diagonal sum multiplied by lambda).
+
+    It takes a list of tensors (produced by network layers) and returns the loss value: (cross-correlation matrix - Identity)**2
+    It uses the parameter lambda to tradeoff between the sum of the diagonal and off-diagonal of the latter matrix.
+    (i.e off-diagonal sum multiplied by lambda).
+
+    Note:
+        This module is inspired from the Barlow Twin paper: https://arxiv.org/abs/2103.03230
 
     Args:
-        - p: Float in [0, 1] denoting the probability of computing the loss with respect to a tensor in the list (to reduce computation).
-        - lmd: Float mutliplying the off-diagonal sum before adding the diagonal sum: diag_sum + lmd * off_diag_sum
+        p (float, Optional): Probability of computing the loss with respect to each tensor in the list (to reduce computation).
+        lmd (float, Optional): Coefficient mutliplying the off-diagonal sum before adding the diagonal sum: `diag_sum + lmd * off_diag_sum`.
     
-    Forward Args:
-        - x (List[Tensor]): The rank of each tensor must be larger than 1, i.e its shape must be [batch, d1, *].
+    Shape:
+        - x (List[torch.Tensor]): The rank of each tensor must be larger than 1,
+                               i.e its shape must be [batch, d1, *],
+                                otherwise, the last dimension must be unsqueezed before passing it.
+                                Also, the first dimension must be equal for every tensor in passed list.
+
+    Example:
+        >>> from deepblocks.regularizer import AntiCorrelation
+        >>> anti_corr = AntiCorrelation(lmd=1.)
+        >>> x1 = torch.rand(100, 24)
+        >>> x2 = torch.rand(100, 30, 300)
+        >>> loss = anti_corr([x1, x2])
     """
 
     def __init__(self, p: float = 0.5, lmd: float = 0.05):
@@ -24,6 +37,7 @@ class AntiCorrelation(nn.Module):
         self.lmd = lmd
 
     def forward(self, x: List[torch.Tensor]):
+        """ """
         xx = []
         for t in x:
             if torch.rand(1) < self.p:
@@ -31,7 +45,7 @@ class AntiCorrelation(nn.Module):
                 xx.append(t.flatten(1))
 
         if xx == []:
-            return torch.tensor(0)
+            return 0
 
         x = torch.cat(xx, dim=-1)  # N x D
 
