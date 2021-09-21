@@ -6,7 +6,7 @@ def test_consistency():
     # decrease in loss <=> increase in auroc
     x = torch.nn.Parameter(torch.randn(100, 1))
     y = torch.randint(0, 2, size=(100, 1))
-    auc = AUCMarginLoss(p=0.5, m=1)
+    auc = AUCMarginLoss(p=(y==1).float().mean(), m=0.99)
     auroc = AUROC(pos_label=1, compute_on_step=True)
     opt = torch.optim.SGD([x], lr=1)
 
