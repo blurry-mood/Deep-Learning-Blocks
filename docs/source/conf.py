@@ -21,7 +21,7 @@ copyright = '2021, Ayoub Assis'
 author = 'Ayoub Assis'
 
 # The full version, including alpha/beta/rc tags
-exec(open( '../../../deepblocks/version.py').read())
+exec(open( '../../deepblocks/version.py').read())
 release = __version__
 
 
@@ -39,7 +39,8 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
     'sphinx.ext.napoleon',
-    'sphinx_rtd_theme'
+    'sphinx_rtd_theme',
+    'sphinx.ext.githubpages'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
