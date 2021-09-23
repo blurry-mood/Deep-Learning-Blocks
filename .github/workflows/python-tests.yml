@@ -5,6 +5,8 @@ name: Running tests
 
 on:
   push:
+    branches:
+      - tests
 
 jobs:
   build:

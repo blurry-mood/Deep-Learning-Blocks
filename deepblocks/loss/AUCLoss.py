@@ -5,6 +5,7 @@ Classes:
     - AUCMarginLoss
 """
 
+from typing import Optional
 import torch
 from torch import Tensor
 
@@ -108,8 +109,8 @@ class AUCMarginLoss(_Loss):
         Only the binary classification case is supported by this implementation.
 
     Args:
-        p (float, Optional): The probability of positive class: P(class=1).   
-                    Default is 0.5.
+        p (float or None, Optional): The probability of positive class: P(class=1). If p is none, this parameter is estimated per variable for every batch during the forward pass.
+                                    Default is None.
         m (float, Optional): Specifies the desired margin between the probabilities of positive samples and negative samples. 
                         It should non-negative and less than or equals to 1.   
                         Default is 1.
@@ -131,20 +132,24 @@ class AUCMarginLoss(_Loss):
         >>> loss = aucmarginloss(logits, labels)
 
     """
-    def __init__(self, p:float=0.5, m:float=1., reduce:str='mean'):
+    def __init__(self, p:Optional[float]=None, m:float=1., reduce:str='mean'):
         super(AUCMarginLoss, self).__init__(p, m, reduce)
-        if not(0<=p<=1):
+        if p and not(0<=p<=1):
             raise ValueError(f'p={p} is probability value, it should belong to [0, 1]')
         if not(0<=m<=1):
             raise ValueError(f'm={m} should belong to [0, 1]')
         
-        self.a = nn.Parameter(torch.randn(1))
-        self.b = nn.Parameter(torch.randn(1))
+        self.a = nn.Parameter(torch.rand(1))
+        self.b = nn.Parameter(torch.rand(1))
 
     def forward(self, x, y):
         """ """
         positive = y==1
         negative = y==0
+        if self.p is None:
+            n = positive.float().sum(axis=0)
+            m = negative.float().sum(axis=0)
+            self.p = n/(n+m)    # p.shape = x.shape[1:]
 
         x = torch.sigmoid(x)
 
@@ -163,9 +168,3 @@ class AUCMarginLoss(_Loss):
             loss = loss.sum()
         
         return loss
-
-if __name__ == '__main__':
-    auc = AUCMarginLoss() # AUCLoss()
-    x = torch.rand(10, 1)
-    y = torch.randint(0, 1, size=(10, 1))
-    auc(x, y)
