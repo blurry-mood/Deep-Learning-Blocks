@@ -9,3 +9,4 @@ It contains:
 from .FlipConv2d import FlipConv2d
 from .SE import SE
 from .MultiHeadAttention import MultiHeadAttention, MultiHeadAttentionV2
+from .DenseBlock import DenseBlock
