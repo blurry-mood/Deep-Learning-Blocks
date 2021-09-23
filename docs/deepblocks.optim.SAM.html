@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>deepblocks.optim.SAM module &mdash; 0.1.6</title>
+  <title>deepblocks.optim.SAM module &mdash; 0.1.8</title>
   
 
   
@@ -178,11 +178,11 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.optim.optimizer.Optimizer</span></code></p>
 <p>This file contains an implementation of the Sharpness-Aware Minimization optimization algorithm.</p>
 <p>This optimizer is defined with respect to two parameters:
-- an integer <cite>p</cite> referring to the p-norm used to determine the neighborhood of the model parameters,
-- a float <cite>rho</cite> defining the boundary of the aforementioned neighborhood.</p>
+- an integer <code class="docutils literal notranslate"><span class="pre">p</span></code> referring to the p-norm used to determine the neighborhood of the model parameters,
+- a float <code class="docutils literal notranslate"><span class="pre">rho</span></code> defining the boundary of the aforementioned neighborhood.</p>
 <p>This optimizer, in contrast with standard ones, relies on two phases to perform a single step:
-1. <cite>first_step</cite>: it computes the position having the worst training loss value in the neighborhood,
-2. <cite>second_step</cite>: it computes the gradient at that calculated position, then takes a step.
+1. <code class="docutils literal notranslate"><span class="pre">first_step</span></code>: it computes the position having the worst training loss value in the neighborhood,
+2. <code class="docutils literal notranslate"><span class="pre">second_step</span></code>: it computes the gradient at that calculated position, then takes a step.
 <strong>Note</strong>: Before executing the second step, an additional forward-backward propagation pass must be performed.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -196,11 +196,11 @@
 <li><p><strong>parameters</strong> – List of an nn.Module parameters.</p></li>
 <li><p><strong>base_optimizer</strong> (<em>torch.optim.Optimizer</em>) – The class of the optimizer used to update the weights.</p></li>
 <li><p><strong>rho</strong> (<em>float</em><em>, </em><em>Optional</em>) – Non-negative float defining the boundary of the neighborhood.
-Note that using <cite>rho=0</cite> is equivalent to using the bare <cite>base_optimizer</cite>.
+Note that using <code class="docutils literal notranslate"><span class="pre">rho=0</span></code> is equivalent to using the bare <code class="docutils literal notranslate"><span class="pre">base_optimizer</span></code>.
 Default is 0.1.</p></li>
 <li><p><strong>p</strong> (<em>int</em><em>, </em><em>Optional</em>) – Positive Integer definining the p-norm.
 Default is 2.</p></li>
-<li><p><strong>**kwargs</strong> – additional parameters passed to <cite>base_optimizer</cite></p></li>
+<li><p><strong>**kwargs</strong> – additional parameters passed to <code class="docutils literal notranslate"><span class="pre">base_optimizer</span></code></p></li>
 </ul>
 </dd>
 </dl>

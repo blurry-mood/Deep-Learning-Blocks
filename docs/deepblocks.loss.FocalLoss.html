@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>deepblocks.loss.FocalLoss module &mdash; 0.1.6</title>
+  <title>deepblocks.loss.FocalLoss module &mdash; 0.1.8</title>
   
 
   
@@ -180,9 +180,9 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">deepblocks.loss._Loss._Loss</span></code></p>
 <p>This loss is derived from the cross entropy loss with the aim of reducing the dominance of easy examples (probability &gt; 0.5)
 on the loss value, and thus highlighting the loss of hard examples (proba &lt; 0.5).</p>
-<p>This loss is defined with respect to a float hyperparammeter <cite>gamma</cite> that is non-negative. It controls how
-the modulating factor attenuates the loss of easy examples, larger values of <cite>gamma</cite> decrease their loss value.</p>
-<p>Moreover, another parameter (tensor) <cite>alpha</cite> could be used to further balance the loss of each sample when computing the loss.</p>
+<p>This loss is defined with respect to a float hyperparammeter <code class="docutils literal notranslate"><span class="pre">gamma</span></code> that is non-negative. It controls how
+the modulating factor attenuates the loss of easy examples, larger values of <code class="docutils literal notranslate"><span class="pre">gamma</span></code> decrease their loss value.</p>
+<p>Moreover, another parameter (tensor) <code class="docutils literal notranslate"><span class="pre">alpha</span></code> could be used to further balance the loss of each sample when computing the loss.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <ul class="simple">
@@ -207,8 +207,8 @@ Default is ‘mean’.</p></li>
 </dl>
 <dl class="simple">
 <dt>Shape:</dt><dd><ul class="simple">
-<li><p>x (torch.Tensor): If <cite>cls</cite> is set to false, x is a (N, <a href="#id1"><span class="problematic" id="id2">*</span></a>) tensor of logits. If <cite>cls</cite> is set to true, x is a (N, C, d1, …) tensor, it’s softmaxed along the dimension 1 (dimension start from 0).</p></li>
-<li><p>y (torch.Tensor): If <cite>cls</cite> is set to false, y is a (N, <a href="#id3"><span class="problematic" id="id4">*</span></a>) float tensor with ground truth labels. If <cite>cls</cite> is set to true, x is a (N, d1, …) long tensor of ground truth labels.</p></li>
+<li><p>x (torch.Tensor): If <code class="docutils literal notranslate"><span class="pre">cls</span></code> is set to false, x is a (N, <a href="#id1"><span class="problematic" id="id2">*</span></a>) tensor of logits. If <code class="docutils literal notranslate"><span class="pre">cls</span></code> is set to true, x is a (N, C, d1, …) tensor, it’s softmaxed along the dimension 1 (dimension start from 0).</p></li>
+<li><p>y (torch.Tensor): If <code class="docutils literal notranslate"><span class="pre">cls</span></code> is set to false, y is a (N, <a href="#id3"><span class="problematic" id="id4">*</span></a>) float tensor with ground truth labels. If <code class="docutils literal notranslate"><span class="pre">cls</span></code> is set to true, x is a (N, d1, …) long tensor of ground truth labels.</p></li>
 <li><p>alpha (torch.Tensor, Optional): A float tensor with the same shape as y, or broadcastable.</p></li>
 </ul>
 </dd>
