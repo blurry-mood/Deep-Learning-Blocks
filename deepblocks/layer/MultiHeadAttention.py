@@ -64,7 +64,7 @@ class MultiHeadAttention(nn.Module):
 class MultiHeadAttentionV2(nn.Module):
     """ Initializes a modified Multi-Head Attention module, labelled V2.
 
-    It has two differences with the vanilla version, namely, the hidden dimension in each head is a constant equalling to `input_dim`,
+    It has two differences with the vanilla version, namely, the hidden dimension in each head is a constant equalling to ``input_dim``,
     and the projection matrix used to obtain the key is always the identity matrix, to reduce the redundancy of parameters 
     engendered by the multiplication of two learnable weight matrices: Key & Query.
 

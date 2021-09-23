@@ -14,7 +14,7 @@ class SE(nn.Module):
         in_channels (int): The number of channels of the input tensor.
         ratio (int, Optional): It controls the capacity and computational cost of the SE block. 
                                 Bigger values reduce the two aforementioned quantities. 
-                                Note that `ratio` should positive and less than or equals to `in_channels`.
+                                Note that ``ratio`` should positive and less than or equals to ``in_channels``.
                                 Default is 16.
 
     Shape:

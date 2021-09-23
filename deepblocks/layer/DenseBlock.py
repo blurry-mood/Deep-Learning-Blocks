@@ -5,10 +5,10 @@ import torch
 class DenseBlock(nn.ModuleDict):
     """ DenseBlock is the elementary "layer" that's repeated several times in DenseNet architecture.
 
-    This block is a sequence of [`nn.BatchNorm2d`, `nn.ReLU`, `nn.Conv2d`] layers, where each one takes as input all previous feature maps 
+    This block is a sequence of (``nn.BatchNorm2d`` + ``nn.ReLU`` + ``nn.Conv2d``) layers, where each one takes as input all previous feature maps 
     produced by the previous layer. Those feature maps are concatenated along the channel dimension.
 
-    The output tensor of this block has `input_channels`+`growth_rate`*`num_layers` channels, 
+    The output tensor of this block has ``input_channels`` + ``growth_rate`` * ``num_layers`` channels, 
     the rest of dimensions have the same number of elements as input.
 
     Note:
@@ -17,17 +17,17 @@ class DenseBlock(nn.ModuleDict):
     Args:
         in_channels (int): Number of channels in the input tensor.
         growth_rate (int, Optional): Number of output channels in each layer in the block, 
-                                    i.e `output_channels` in every conv2d is `growth_rate`.
+                                    i.e ``output_channels`` in every conv2d is ``growth_rate``.
                                     Default is 12.
-        num_layers (int, Optional): Number of consecutive [`nn.BatchNorm2d`, `nn.ReLU`, `nn.Conv2d`] layers. 
+        num_layers (int, Optional): Number of consecutive [``nn.BatchNorm2d``, ``nn.ReLU``, ``nn.Conv2d``] layers. 
                                     Default is 4.
-        activation (nn.Module, Optional): The desired activation to instead of `nn.ReLU`. 
-                                            If `None` is passed, the activation is skipped,
+        activation (nn.Module, Optional): The desired activation to instead of ``nn.ReLU``. 
+                                            If ``None`` is passed, the activation is skipped,
                                             otherwise, the supplied class must instantiable without passing any arguments.
-                                            Default is `nn.ReLU`
-        batchnorm (nn.Module, Optional): The batch normalization layer to use. Default: `nn.BatchNorm2d`.
-            Warning:
-                Only `nn.BatchNorm2d` and `None` are possible.
+                                            Default is ``nn.ReLU``
+        batchnorm (nn.Module, Optional): The batch normalization layer to use. 
+                                        Note that only ``nn.BatchNorm2d`` and ``None`` are the possible values.
+                                        Default is ``nn.BatchNorm2d``.
 
     Shape:
         - x (torch.Tensor): A [batch, channels, height, width] input tensor.
@@ -48,7 +48,7 @@ class DenseBlock(nn.ModuleDict):
             self.add_module(f'layer_{i}', self._dense_layer(input, growth_rate, activation, batchnorm   ))
 
     def forward(self, x:torch.Tensor):
-        """ Returns a tensor with `input_channels`+`growth_rate`*`num_layers` channels. """
+        """ Returns a tensor with ``input_channels`` + ``growth_rate`` * ``num_layers`` channels. """
         for _, layer in self.items():
             x = torch.cat([x, layer(x)], dim=1) # concatenate along the channel dimension
         return x

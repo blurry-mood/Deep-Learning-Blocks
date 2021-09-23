@@ -19,18 +19,18 @@ class KLDivLoss(_Loss):
         This implementation supports Softmax as a mean to transform logits to probabilities.
 
     Args:
-        dim (int, Optional): The dimension along which Softmax will be computed (so every slice along `dim` will sum to 1), 
-                              for both `x` and `y`. Default is 1.
+        dim (int, Optional): The dimension along which Softmax will be computed (so every slice along ``dim`` will sum to 1), 
+                              for both ``x`` and ``y``. Default is 1.
         reduction (str, Optional): Specifies the reduction to apply to the output: 'none' | 'batchmean' | 'sum' | 'mean'. 
                                         'none': no reduction will be applied. 
                                         'batchmean': the sum of the output will be divided by batchsize. 
                                         'sum': the output will be summed. 
                                         'mean': the output will be divided by the number of elements in the output.
-                                        Default is 'batchmean`.
+                                        Default is 'batchmean``.
     
     Shape:
         - x (torch.Tensor): Its shape is (N, ...). It's the tensor of logits that is desired to match.
-        - y (torch.Tensor): The same shape as x, i.e. (N, ...). It's the tensor of logits that should match the distribution of `x`.
+        - y (torch.Tensor): The same shape as x, i.e. (N, ...). It's the tensor of logits that should match the distribution of ``x``.
     
     Example:
         >>> from deepblocks.loss import KLDivLoss

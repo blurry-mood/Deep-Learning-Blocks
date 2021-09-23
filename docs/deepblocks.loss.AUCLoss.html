@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>deepblocks.loss.AUCLoss module &mdash; 0.1.6</title>
+  <title>deepblocks.loss.AUCLoss module &mdash; 0.1.8</title>
   
 
   
@@ -199,13 +199,13 @@
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>loss</strong> (<em>str</em><em>, </em><em>Optional</em>) – Funtion that computest the distance between a positive-negative pair of samples.
-The available options are <cite>sigmoid</cite>, <cite>tanh</cite> &amp; <cite>power_p</cite>. <a href="#id1"><span class="problematic" id="id2">`</span></a>power_p(negative, positive, gamma) = (negative + gamma - positive)^p.
-If another string or nothing is passed <a href="#id3"><span class="problematic" id="id4">`</span></a>power_p`is used by default.</p></li>
+The available options are <code class="docutils literal notranslate"><span class="pre">sigmoid</span></code>, <code class="docutils literal notranslate"><span class="pre">tanh</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">power_p</span></code>. <a href="#id1"><span class="problematic" id="id2">``</span></a>power_p(negative, positive, gamma) = (negative + gamma - positive)^p.
+If another string or nothing is passed <a href="#id3"><span class="problematic" id="id4">``</span></a>power_p``is used by default.</p></li>
 <li><p><strong>gamma</strong> (<em>float</em><em>, </em><em>Optional</em>) – Specifies the desired margin between the maximum probability of a negative sample and the minimum probability of a positive sample.
-The larger the <cite>gamma</cite>, the more the model enlarges the gap between positive and negative predictions.
-It should non-negative and less than or equals to 1. This argument is dropped unless <cite>loss</cite> is <cite>power_p</cite>.
+The larger the <code class="docutils literal notranslate"><span class="pre">gamma</span></code>, the more the model enlarges the gap between positive and negative predictions.
+It should non-negative and less than or equals to 1. This argument is dropped unless <code class="docutils literal notranslate"><span class="pre">loss</span></code> is <code class="docutils literal notranslate"><span class="pre">power_p</span></code>.
 Default is 0.3.</p></li>
-<li><p><strong>p</strong> (<em>float</em><em>, </em><em>Optional</em>) – Specifies the exponent used in <cite>power_p</cite>. It should be larger than 1. This argument  is dropped unless <cite>loss</cite> is <cite>power_p</cite>.
+<li><p><strong>p</strong> (<em>float</em><em>, </em><em>Optional</em>) – Specifies the exponent used in <code class="docutils literal notranslate"><span class="pre">power_p</span></code>. It should be larger than 1. This argument  is dropped unless <code class="docutils literal notranslate"><span class="pre">loss</span></code> is <code class="docutils literal notranslate"><span class="pre">power_p</span></code>.
 Default is 2.</p></li>
 <li><p><strong>reduce</strong> (<em>str</em><em>, </em><em>Optional</em>) – Specifies the reduction to apply to the output: ‘mean’ | ‘sum’.
 ‘mean’: the sum of the output will be divided by the number of elements in the output,
@@ -243,7 +243,7 @@ Default is ‘mean’.</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="deepblocks.loss.AUCLoss.AUCMarginLoss">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepblocks.loss.AUCLoss.</span></span><span class="sig-name descname"><span class="pre">AUCMarginLoss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduce</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'mean'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepblocks.loss.AUCLoss.AUCMarginLoss" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepblocks.loss.AUCLoss.</span></span><span class="sig-name descname"><span class="pre">AUCMarginLoss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduce</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'mean'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepblocks.loss.AUCLoss.AUCMarginLoss" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">deepblocks.loss._Loss._Loss</span></code></p>
 <p>This is an implementation of the AUC margin loss published in this paper <a class="reference external" href="https://arxiv.org/abs/2012.03173">https://arxiv.org/abs/2012.03173</a></p>
 <div class="admonition note">
@@ -253,8 +253,8 @@ Default is ‘mean’.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>p</strong> (<em>float</em><em>, </em><em>Optional</em>) – The probability of positive class: P(class=1).
-Default is 0.5.</p></li>
+<li><p><strong>p</strong> (<em>float</em><em> or </em><em>None</em><em>, </em><em>Optional</em>) – The probability of positive class: P(class=1). If p is none, this parameter is estimated per variable for every batch during the forward pass.
+Default is None.</p></li>
 <li><p><strong>m</strong> (<em>float</em><em>, </em><em>Optional</em>) – Specifies the desired margin between the probabilities of positive samples and negative samples.
 It should non-negative and less than or equals to 1.
 Default is 1.</p></li>

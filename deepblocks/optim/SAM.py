@@ -8,12 +8,12 @@ class SAM(Optimizer):
     """ This file contains an implementation of the Sharpness-Aware Minimization optimization algorithm.
 
     This optimizer is defined with respect to two parameters: 
-    - an integer `p` referring to the p-norm used to determine the neighborhood of the model parameters,
-    - a float `rho` defining the boundary of the aforementioned neighborhood.
+    - an integer ``p`` referring to the p-norm used to determine the neighborhood of the model parameters,
+    - a float ``rho`` defining the boundary of the aforementioned neighborhood.
 
     This optimizer, in contrast with standard ones, relies on two phases to perform a single step:
-    1. `first_step`: it computes the position having the worst training loss value in the neighborhood,
-    2. `second_step`: it computes the gradient at that calculated position, then takes a step.
+    1. ``first_step``: it computes the position having the worst training loss value in the neighborhood,
+    2. ``second_step``: it computes the gradient at that calculated position, then takes a step.
     **Note**: Before executing the second step, an additional forward-backward propagation pass must be performed.
 
     Note:
@@ -23,11 +23,11 @@ class SAM(Optimizer):
         parameters: List of an nn.Module parameters.  
         base_optimizer (torch.optim.Optimizer): The class of the optimizer used to update the weights.
         rho (float, Optional): Non-negative float defining the boundary of the neighborhood. 
-                                Note that using `rho=0` is equivalent to using the bare `base_optimizer`.
+                                Note that using ``rho=0`` is equivalent to using the bare ``base_optimizer``.
                                 Default is 0.1.  
         p (int, Optional): Positive Integer definining the p-norm.
                             Default is 2.  
-        **kwargs: additional parameters passed to `base_optimizer` 
+        **kwargs: additional parameters passed to ``base_optimizer`` 
 
     Example:
         >>> from deepblocks.optim import SAM

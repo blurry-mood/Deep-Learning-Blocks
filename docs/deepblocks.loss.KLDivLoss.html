@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>deepblocks.loss.KLDivLoss module &mdash; 0.1.6</title>
+  <title>deepblocks.loss.KLDivLoss module &mdash; 0.1.8</title>
   
 
   
@@ -187,21 +187,21 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dim</strong> (<em>int</em><em>, </em><em>Optional</em>) – The dimension along which Softmax will be computed (so every slice along <cite>dim</cite> will sum to 1),
-for both <cite>x</cite> and <cite>y</cite>. Default is 1.</p></li>
+<li><p><strong>dim</strong> (<em>int</em><em>, </em><em>Optional</em>) – The dimension along which Softmax will be computed (so every slice along <code class="docutils literal notranslate"><span class="pre">dim</span></code> will sum to 1),
+for both <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>. Default is 1.</p></li>
 <li><p><strong>reduction</strong> (<em>str</em><em>, </em><em>Optional</em>) – Specifies the reduction to apply to the output: ‘none’ | ‘batchmean’ | ‘sum’ | ‘mean’.
 ‘none’: no reduction will be applied.
 ‘batchmean’: the sum of the output will be divided by batchsize.
 ‘sum’: the output will be summed.
 ‘mean’: the output will be divided by the number of elements in the output.
-Default is ‘batchmean`.</p></li>
+Default is ‘batchmean``.</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="simple">
 <dt>Shape:</dt><dd><ul class="simple">
 <li><p>x (torch.Tensor): Its shape is (N, …). It’s the tensor of logits that is desired to match.</p></li>
-<li><p>y (torch.Tensor): The same shape as x, i.e. (N, …). It’s the tensor of logits that should match the distribution of <cite>x</cite>.</p></li>
+<li><p>y (torch.Tensor): The same shape as x, i.e. (N, …). It’s the tensor of logits that should match the distribution of <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p></li>
 </ul>
 </dd>
 </dl>

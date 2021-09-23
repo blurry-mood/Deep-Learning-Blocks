@@ -20,6 +20,7 @@ To install the latest, but unstable version:
 ### **Layers**
 * Flip-Invariant Conv2d
 * Squeeze-Excitation Block
+* Dense Block
 * Multi-Head Self-Attention
 * Multi-Head Self-Attention V2
 
