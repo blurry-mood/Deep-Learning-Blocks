@@ -80,7 +80,7 @@ class _LitModel(LightningModule):
 def barlow_twin(model: nn.Module, transforms: List, dataloader: Union[DataLoader,LightningDataModule], lmd: float=.05, opt:str='AdamW', opt_kwargs: Dict[str, float]={'lr':1e-3},  **trainer_kwargs):
     """ This function trains the model following the Barlow Twin method to reduce redundancy in components.
         
-    During training, this function shows three metrics in the progress bar, namely: total loss, diagonal loss, off diagonal loss.
+    During training, this function shows three metrics in the progress bar, namely: ``total loss``, ``diagonal loss``, ``off diagonal loss``.
     
     Note:
         For more, check the original paper: https://arxiv.org/abs/2103.03230

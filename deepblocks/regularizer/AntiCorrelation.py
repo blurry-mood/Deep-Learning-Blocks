@@ -14,7 +14,7 @@ class AntiCorrelation(nn.Module):
 
     Args:
         p (float, Optional): Probability of computing the loss with respect to each tensor in the list (to reduce computation).
-        lmd (float, Optional): Coefficient mutliplying the off-diagonal sum before adding the diagonal sum: `diag_sum + lmd * off_diag_sum`.
+        lmd (float, Optional): Coefficient mutliplying the off-diagonal sum before adding the diagonal sum: ``diag_sum + lmd * off_diag_sum``.
     
     Shape:
         - x (List[torch.Tensor]): The rank of each tensor must be larger than 1,

@@ -8,19 +8,19 @@ class FlipConv2d(nn.Module):
     
     This kernel structure enables making the layer invariant to flipping. 
     Formally, if the feature map X' is the horizonatally-flipped version of X 
-    and `flipconv2d` is this layer when `h_invariant` is true, then
-    flipconv2d(X`) equals the horizonatally-flipped version of flipconv2d(X).
+    and ``flipconv2d`` is this layer when ``h_invariant`` is true, then
+    flipconv2d(X``) equals the horizonatally-flipped version of flipconv2d(X).
     This is achieved by forcing the kernel plane (indexed by the last two dimensions) to be symmetric with respect to its vertical axis.
 
-    This module accepts the same parameters as nn.Conv2d, as well as `h_invariant` & `v_invariant`.
+    This module accepts the same parameters as nn.Conv2d, as well as ``h_invariant`` & ``v_invariant``.
 
-    if `h_invariant` and `v_invariant` are both false, this layer acts like nn.Conv2d.
+    if ``h_invariant`` and ``v_invariant`` are both false, this layer acts like nn.Conv2d.
 
     Args:
         h_invariant (bool, Optional): If true, the kernels are symmetric with respect to vertical axis. Default: True.
         v_invariant (bool, Optional): If true, the kernels are symmetric with respect to horizontal axis. Default: True.
         **kwargs: Arguments passed for the standard nn.Conv2d layer.   
-                    Note that `in_channels`, `out_channels` & `kernel_size` are required. The others are optional and take the default value of nn.Conv2d.
+                    Note that ``in_channels``, ``out_channels`` & ``kernel_size`` are required. The others are optional and take the default value of nn.Conv2d.
 
     Shape:
         - x (torch.Tensor): A [B, C, H, W] input feature map.

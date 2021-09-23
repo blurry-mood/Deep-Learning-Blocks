@@ -29,10 +29,10 @@ class FocalLoss(_Loss):
     """ This loss is derived from the cross entropy loss with the aim of reducing the dominance of easy examples (probability > 0.5)
     on the loss value, and thus highlighting the loss of hard examples (proba < 0.5).
 
-    This loss is defined with respect to a float hyperparammeter `gamma` that is non-negative. It controls how 
-    the modulating factor attenuates the loss of easy examples, larger values of `gamma` decrease their loss value.
+    This loss is defined with respect to a float hyperparammeter ``gamma`` that is non-negative. It controls how 
+    the modulating factor attenuates the loss of easy examples, larger values of ``gamma`` decrease their loss value.
 
-    Moreover, another parameter (tensor) `alpha` could be used to further balance the loss of each sample when computing the loss.
+    Moreover, another parameter (tensor) ``alpha`` could be used to further balance the loss of each sample when computing the loss.
 
     Note:
         - For more details check: https://arxiv.org/abs/1708.02002
@@ -50,8 +50,8 @@ class FocalLoss(_Loss):
                                     Default is 'mean'.
 
     Shape:
-        - x (torch.Tensor): If `cls` is set to false, x is a (N, *) tensor of logits. If `cls` is set to true, x is a (N, C, d1, ...) tensor, it's softmaxed along the dimension 1 (dimension start from 0).
-        - y (torch.Tensor): If `cls` is set to false, y is a (N, *) float tensor with ground truth labels. If `cls` is set to true, x is a (N, d1, ...) long tensor of ground truth labels.
+        - x (torch.Tensor): If ``cls`` is set to false, x is a (N, *) tensor of logits. If ``cls`` is set to true, x is a (N, C, d1, ...) tensor, it's softmaxed along the dimension 1 (dimension start from 0).
+        - y (torch.Tensor): If ``cls`` is set to false, y is a (N, *) float tensor with ground truth labels. If ``cls`` is set to true, x is a (N, d1, ...) long tensor of ground truth labels.
         - alpha (torch.Tensor, Optional): A float tensor with the same shape as y, or broadcastable.
 
     Example:

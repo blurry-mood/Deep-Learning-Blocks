@@ -12,7 +12,7 @@ class FReLU(nn.Module):
         Note:
             For more details, check the original paper: https://arxiv.org/abs/2007.11824
         Note:
-            This implementation leaves the choice of the parametric pooling window size up to the user, it's specified in `kernel_size`.
+            This implementation leaves the choice of the parametric pooling window size up to the user, it's specified in ``kernel_size``.
             
         Args:
             in_channels (int): The number of channels of the input tensor.

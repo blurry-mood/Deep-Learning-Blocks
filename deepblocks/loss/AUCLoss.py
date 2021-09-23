@@ -40,13 +40,13 @@ class AUCLoss(_Loss):
 
     Args:
         loss (str, Optional): Funtion that computest the distance between a positive-negative pair of samples. 
-                    The available options are `sigmoid`, `tanh` & `power_p`. `power_p(negative, positive, gamma) = (negative + gamma - positive)^p.
-                    If another string or nothing is passed `power_p`is used by default.
+                    The available options are ``sigmoid``, ``tanh`` & ``power_p``. ``power_p(negative, positive, gamma) = (negative + gamma - positive)^p.
+                    If another string or nothing is passed ``power_p``is used by default.
         gamma (float, Optional): Specifies the desired margin between the maximum probability of a negative sample and the minimum probability of a positive sample. 
-                        The larger the `gamma`, the more the model enlarges the gap between positive and negative predictions.
-                        It should non-negative and less than or equals to 1. This argument is dropped unless `loss` is `power_p`.
+                        The larger the ``gamma``, the more the model enlarges the gap between positive and negative predictions.
+                        It should non-negative and less than or equals to 1. This argument is dropped unless ``loss`` is ``power_p``.
                         Default is 0.3.
-        p (float, Optional): Specifies the exponent used in `power_p`. It should be larger than 1. This argument  is dropped unless `loss` is `power_p`.
+        p (float, Optional): Specifies the exponent used in ``power_p``. It should be larger than 1. This argument  is dropped unless ``loss`` is ``power_p``.
                         Default is 2.
         reduce (str, Optional): Specifies the reduction to apply to the output: 'mean' | 'sum'.  
                     'mean': the sum of the output will be divided by the number of elements in the output, 
