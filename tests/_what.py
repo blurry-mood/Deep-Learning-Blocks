@@ -4,5 +4,5 @@
 - Invariance of output with respect to some inputs
 - Logic: loss and weights evolution when optimizing.
 - Direction expectation
-
+ 
 """
