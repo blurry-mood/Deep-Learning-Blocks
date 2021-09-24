@@ -89,6 +89,7 @@ class ICTNet(nn.ModuleDict):
         self.add_module('conv2', nn.Conv2d(outs[-1]+ins[-1]+ins[-2], out_channels, 1))
 
     def forward(self, x):
+        """ """
         *_, h, w = x.shape
         pow = 2**self.n_pool
         if h%pow!=0 or w%pow!=0:
