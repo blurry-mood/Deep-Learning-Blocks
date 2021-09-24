@@ -41,7 +41,7 @@ class ICTNet(nn.ModuleDict):
                                     Default is 2e-1.
 
     Shape:
-        - input (torch.Tensor): A [batch, ``in_channels``, height, width] tensor.
+        - input (torch.Tensor): A [batch, ``in_channels``, height, width] tensor. Note that `height` and `width` should be divisable by ``2**n_pools``.
         - output (torch.Tensor): A [batch, ``out_channels``, height, width] tensor.
 
     Example:
@@ -87,10 +87,13 @@ class ICTNet(nn.ModuleDict):
             self.add_module(f'up_se_{i}', SE(ins[-1], 1))
 
         self.add_module('conv2', nn.Conv2d(outs[-1]+ins[-1]+ins[-2], out_channels, 1))
-        print(ins)
-        print(outs)
 
     def forward(self, x):
+        *_, h, w = x.shape
+        pow = 2**self.n_pool
+        if h%pow!=0 or w%pow!=0:
+            raise ValueError(f'Input shape {(h, w)} should be divisable by {pow}')
+
         x = self['conv1'](x)
         xx = []
         # downsample
@@ -129,12 +132,3 @@ class ICTNet(nn.ModuleDict):
 
     def _upsample_layer(self, channels:int):
         return nn.ConvTranspose2d(channels, channels, kernel_size=3, stride=2, padding=1)
-
-
-        
-if __name__ == '__main__':
-    with torch.no_grad():
-        ictnet = ICTNet(3, 3, 2, n_pool=2, growth_rate=12, n_layers_per_block=[3, 5, 2, 4, 3], dropout=0)
-        x = torch.rand(1, 3, 32, 32)
-        y = ictnet(x)
-        print(y.shape)
