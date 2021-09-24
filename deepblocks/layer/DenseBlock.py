@@ -5,7 +5,7 @@ import torch
 class DenseBlock(nn.ModuleDict):
     """ DenseBlock is the elementary "layer" that's repeated several times in DenseNet architecture.
 
-    This block is a sequence of (``nn.BatchNorm2d`` + ``nn.ReLU`` + ``nn.Conv2d``) layers, where each one takes as input all previous feature maps 
+    This block is a sequence of (``nn.BatchNorm2d`` + ``nn.ReLU`` + ``nn.Conv2d`` + ``nn.Dropout``) layers, where each one takes as input all previous feature maps 
     produced by the previous layer. Those feature maps are concatenated along the channel dimension.
 
     The output tensor of this block has ``input_channels`` + ``growth_rate`` * ``num_layers`` channels, 
@@ -21,6 +21,8 @@ class DenseBlock(nn.ModuleDict):
                                     Default is 12.
         num_layers (int, Optional): Number of consecutive [``nn.BatchNorm2d``, ``nn.ReLU``, ``nn.Conv2d``] layers. 
                                     Default is 4.
+        dropout (float, Optional): Probability of the ``Dropout``.
+                                    Default is 1e-1.
         activation (nn.Module, Optional): The desired activation to instead of ``nn.ReLU``. 
                                             If ``None`` is passed, the activation is skipped,
                                             otherwise, the supplied class must instantiable without passing any arguments.
@@ -40,12 +42,12 @@ class DenseBlock(nn.ModuleDict):
     
     """
 
-    def __init__(self, in_channels:int, growth_rate:int=12, num_layers:int=4, activation:nn.Module=nn.ReLU, batchnorm:nn.Module=nn.BatchNorm2d):
+    def __init__(self, in_channels:int, growth_rate:int=12, num_layers:int=4, dropout:float=0.1, activation:nn.Module=nn.ReLU, batchnorm:nn.Module=nn.BatchNorm2d):
         super().__init__()
 
         for i in range(num_layers):
             input = in_channels + i * growth_rate
-            self.add_module(f'layer_{i}', self._dense_layer(input, growth_rate, activation, batchnorm   ))
+            self.add_module(f'layer_{i}', self._dense_layer(input, growth_rate, activation, batchnorm, dropout))
 
     def forward(self, x:torch.Tensor):
         """ Returns a tensor with ``input_channels`` + ``growth_rate`` * ``num_layers`` channels. """
@@ -54,12 +56,14 @@ class DenseBlock(nn.ModuleDict):
         return x
 
 
-    def _dense_layer(self, in_channels, out_channels, act, bn):
+    def _dense_layer(self, in_channels, out_channels, act, bn, dropout):
         models = []
         if bn is not None:
             models.append(bn(in_channels))
         if act is not None:
             models.append(act())
         models.append(nn.Conv2d(in_channels=in_channels, out_channels=out_channels, kernel_size=3, stride=1, padding=1))
+        if dropout>0:
+            models.append(nn.Dropout(dropout))
         return nn.Sequential(*models)
 
