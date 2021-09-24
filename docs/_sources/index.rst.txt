@@ -10,8 +10,9 @@ Welcome to deepblocks's documentation!
    :maxdepth: 1
    :caption: API Documentation
 
-   deepblocks.activation
+   deepblocks.network
    deepblocks.layer
+   deepblocks.activation
    deepblocks.loss
    deepblocks.optim
    deepblocks.regularizer

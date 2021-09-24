@@ -15,6 +15,7 @@ Subpackages
    deepblocks.activation
    deepblocks.layer
    deepblocks.loss
+   deepblocks.network
    deepblocks.optim
    deepblocks.regularizer
    deepblocks.ssl
