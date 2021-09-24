@@ -15,6 +15,7 @@ Subpackages
    deepblocks.activation
    deepblocks.layer
    deepblocks.loss
+   deepblocks.network
    deepblocks.optim
    deepblocks.regularizer
    deepblocks.ssl
@@ -25,4 +26,5 @@ Submodules
 .. toctree::
    :maxdepth: 1
 
+   deepblocks.utils
    deepblocks.version
