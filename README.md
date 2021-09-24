@@ -17,6 +17,9 @@ To install the latest, but unstable version:
 > pip install git+https://github.com/blurry-mood/Deep-Learning-Blocks
 
 ## What's available:
+### **Networks**
+* ICT-Net
+
 ### **Layers**
 * Flip-Invariant Conv2d
 * Squeeze-Excitation Block
