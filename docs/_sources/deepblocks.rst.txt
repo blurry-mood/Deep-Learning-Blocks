@@ -26,5 +26,4 @@ Submodules
 .. toctree::
    :maxdepth: 1
 
-   deepblocks.utils
    deepblocks.version

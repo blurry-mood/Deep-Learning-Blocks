@@ -218,7 +218,7 @@ Default is 2e-1.</p></li>
 </dl>
 <dl class="simple">
 <dt>Shape:</dt><dd><ul class="simple">
-<li><p>input (torch.Tensor): A [batch, <code class="docutils literal notranslate"><span class="pre">in_channels</span></code>, height, width] tensor.</p></li>
+<li><p>input (torch.Tensor): A [batch, <code class="docutils literal notranslate"><span class="pre">in_channels</span></code>, height, width] tensor. Note that <cite>height</cite> and <cite>width</cite> should be divisable by <code class="docutils literal notranslate"><span class="pre">2**n_pools</span></code>.</p></li>
 <li><p>output (torch.Tensor): A [batch, <code class="docutils literal notranslate"><span class="pre">out_channels</span></code>, height, width] tensor.</p></li>
 </ul>
 </dd>
