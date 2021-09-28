@@ -13,3 +13,4 @@ Submodules
    :maxdepth: 1
 
    deepblocks.network.ICTNet
+   deepblocks.network.UNet

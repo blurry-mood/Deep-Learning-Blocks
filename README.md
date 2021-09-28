@@ -18,6 +18,7 @@ To install the latest, but unstable version:
 
 ## What's available:
 ### **Networks**
+* U-Net
 * ICT-Net
 
 ### **Layers**

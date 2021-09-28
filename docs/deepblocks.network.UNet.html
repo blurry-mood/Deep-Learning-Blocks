@@ -1,0 +1,307 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>deepblocks.network.UNet module &mdash; 0.1.9</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="deepblocks.layer package" href="deepblocks.layer.html" />
+    <link rel="prev" title="deepblocks.network.ICTNet module" href="deepblocks.network.ICTNet.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> deepblocks
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="deepblocks.network.html">deepblocks.network package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="deepblocks.network.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="deepblocks.network.ICTNet.html">deepblocks.network.ICTNet module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">deepblocks.network.UNet module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="deepblocks.layer.html">deepblocks.layer package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deepblocks.activation.html">deepblocks.activation package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deepblocks.loss.html">deepblocks.loss package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deepblocks.optim.html">deepblocks.optim package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deepblocks.regularizer.html">deepblocks.regularizer package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deepblocks.ssl.html">deepblocks.ssl package</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">deepblocks</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="deepblocks.network.html">deepblocks.network package</a> &raquo;</li>
+        
+      <li>deepblocks.network.UNet module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/deepblocks.network.UNet.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-deepblocks.network.UNet">
+<span id="deepblocks-network-unet-module"></span><h1>deepblocks.network.UNet module<a class="headerlink" href="#module-deepblocks.network.UNet" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="deepblocks.network.UNet.UNet">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">deepblocks.network.UNet.</span></span><span class="sig-name descname"><span class="pre">UNet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_pool</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_channels</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_channels</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batchnorm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepblocks.network.UNet.UNet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.modules.module.Module</span></code></p>
+<p>Initialize a UNet module for semantic segmentation.</p>
+<p>UNet constists mainly of two paths: Encoder &amp; Decoder.
+The Encoder is a sequence of convolutions and max pooling layers that double the number of channels
+and cut in half both width and height of feature maps.
+In contrast, the Decoder is a sequence of transpose convolutions and convolution that double both
+width &amp; height of feature maps but cutting in half number of channels.</p>
+<p>This implementation introduces more parameters to make the architecture flexible.
+Other than <code class="docutils literal notranslate"><span class="pre">in_channels</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">out_channels</span></code>, the depth of Encoder (and Decoder) is variable,
+as well as the possibility of using batch normalization &amp; dropout after every convolution layer in the network.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The architecture is described in this paper:https://arxiv.org/abs/1505.04597</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To use the vanilla UNet as depicted in the paper, initialize an instance without passing any arguments.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_pool</strong> (<em>int</em><em>, </em><em>Optional</em>) – Depth of Encoder. Number of times to apply max pooling to input tensor throughtout the encoding phase.
+Default is 4.</p></li>
+<li><p><strong>in_channels</strong> (<em>int</em><em>, </em><em>Optional</em>) – Number of channels in input tensor.
+Default is 1.</p></li>
+<li><p><strong>out_channels</strong> (<em>int</em><em>, </em><em>Optional</em>) – Number of channels in output tensor.
+Default is 2.</p></li>
+<li><p><strong>batchnorm</strong> (<em>bool</em><em>, </em><em>Optional</em>) – Specifies whether or not to batch normalize feature maps produced by every <code class="docutils literal notranslate"><span class="pre">nn.Conv2d</span></code> layer.
+Default is false.</p></li>
+<li><p><strong>dropout</strong> (<em>float</em><em>, </em><em>Optional</em>) – Probability of dropping an entry in feature maps produced by <code class="docutils literal notranslate"><span class="pre">nn.Conv2d</span></code> (or <code class="docutils literal notranslate"><span class="pre">nn.BatchNorm2d</span></code> if batchnorm is set to true).
+Default is 0.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Shape:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>input (torch.Tensor): A [batch, <code class="docutils literal notranslate"><span class="pre">in_channels</span></code>, height, width] tensor.</dt><dd><p>The <cite>height</cite> and <cite>width</cite> must be larger enough such as the last tensor after Encode must be larger than (h=3, w=3).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>output (torch.Tensor): A [batch, <code class="docutils literal notranslate"><span class="pre">out_channels</span></code>, height’, width’] tensor.</dt><dd><p>Note that output tensor has smaller width and height than input’s.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">deepblocks.network</span> <span class="kn">import</span> <span class="n">UNet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unet</span> <span class="o">=</span> <span class="n">UNet</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">572</span><span class="p">,</span> <span class="mi">572</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">unet</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># y.shape = (3, 2, 388, 388)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="deepblocks.network.UNet.UNet.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.Tensor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#deepblocks.network.UNet.UNet.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="deepblocks.network.UNet.UNet.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#deepblocks.network.UNet.UNet.training" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="deepblocks.layer.html" class="btn btn-neutral float-right" title="deepblocks.layer package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="deepblocks.network.ICTNet.html" class="btn btn-neutral float-left" title="deepblocks.network.ICTNet module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Ayoub Assis.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
