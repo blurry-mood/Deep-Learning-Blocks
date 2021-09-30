@@ -80,6 +80,7 @@ class UNet(nn.Module):
         self.output = nn.Sequential(*self._make_conv(in_channels=in_channels[-1], out_channels=out_channels, batchnorm=batchnorm, dropout=dropout, padding=1))
 
     def forward(self, x:torch.Tensor):
+        """ """
         xx = [self.conv1(x)] # store encoder outputs
         for i in range(len(self.encoder)):
             xx.append(self.encoder[i](xx[-1]))
