@@ -3,6 +3,6 @@ import torch
 
 def test_shape():
     unet = UNet()
-    x = torch.rand(3, 1, 572, 572)
+    x = torch.rand(3, 1, 256, 256)
     y = unet(x) 
-    assert y.shape == (3, 2, 388, 388)
+    assert y.shape == (3, 2, 256, 256)
