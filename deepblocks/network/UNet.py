@@ -19,7 +19,11 @@ class UNet(nn.Module):
         The architecture is described in this paper:https://arxiv.org/abs/1505.04597
 
     Note:
-        To use the vanilla UNet as depicted in the paper, initialize an instance without passing any arguments.
+        To use the vanilla UNet as depicted in the paper, initialize an instance without passing any arguments. 
+        Otherwise, you customize the network by changing default values.
+        
+    Note:    
+        This implementation uses ``Conv2d`` with a padding of 1 to make sure input & output share same spatial dimensions.
     
     Args:
         n_pool (int, Optional): Depth of Encoder. Number of times to apply max pooling to input tensor throughtout the encoding phase.
@@ -36,16 +40,13 @@ class UNet(nn.Module):
     Shape:
         - input (torch.Tensor): A [batch, ``in_channels``, height, width] tensor. 
             The `height` and `width` must be larger enough such as the last tensor after Encode must be larger than (h=3, w=3).
-        - output (torch.Tensor): A [batch, ``out_channels``, height', width'] tensor. 
-            Note that output tensor has smaller width and height than input's.
-
-
+        - output (torch.Tensor): A [batch, ``out_channels``, height, width] tensor. 
 
     Example:
         >>> from deepblocks.network import UNet
         >>> unet = UNet()
         >>> x = torch.rand(3, 1, 572, 572)
-        >>> y = unet(x) # y.shape = (3, 2, 388, 388)
+        >>> y = unet(x) # y.shape = (3, 2, 572, 572)
     """
 
     def __init__(self, n_pool:int=4, in_channels:int=1, out_channels:int=2, batchnorm:bool=False, dropout:float=0):
@@ -62,7 +63,7 @@ class UNet(nn.Module):
         for _ in range(n_pool):
             in_channels.append(in_channels[-1]*2)
             self.encoder.append(nn.Sequential(
-                nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
+                nn.MaxPool2d(kernel_size=2, stride=2),
                 *self._make_conv(in_channels=in_channels[-2], out_channels=in_channels[-1], batchnorm=batchnorm, dropout=dropout),
                 *self._make_conv(in_channels=in_channels[-1], out_channels=in_channels[-1], batchnorm=batchnorm, dropout=dropout)  
             ))
@@ -70,17 +71,18 @@ class UNet(nn.Module):
         self.upsampler = nn.ModuleList()
         self.decoder = nn.ModuleList()
         for i in range(n_pool):
-            self.upsampler.append(nn.ConvTranspose2d(in_channels=in_channels[-1], out_channels=in_channels[-2-i], kernel_size=2, stride=2, padding=0),)
+            self.upsampler.append(nn.ConvTranspose2d(in_channels=in_channels[-1], out_channels=in_channels[-2-i], kernel_size=2, stride=2),)
             self.decoder.append(nn.Sequential(
                 *self._make_conv(in_channels=2*in_channels[-i-2], out_channels=in_channels[-i-2], batchnorm=batchnorm, dropout=dropout),
                 *self._make_conv(in_channels=in_channels[-i-2], out_channels=in_channels[-i-2], batchnorm=batchnorm, dropout=dropout),
             ))
             in_channels[-1] = in_channels[-2-i]
 
-        self.output = nn.Sequential(*self._make_conv(in_channels=in_channels[-1], out_channels=out_channels, batchnorm=batchnorm, dropout=dropout, padding=1))
+        self.output = nn.Sequential(*self._make_conv(in_channels=in_channels[-1], out_channels=out_channels, batchnorm=batchnorm, dropout=dropout))
 
     def forward(self, x:torch.Tensor):
         """ """
+        print('\n\n')
         xx = [self.conv1(x)] # store encoder outputs
         for i in range(len(self.encoder)):
             xx.append(self.encoder[i](xx[-1]))
@@ -89,22 +91,18 @@ class UNet(nn.Module):
         x = xx[0]
 
         for i in range(len(self.decoder)):
-            x = self.upsampler[i](x)
-            diff_h, diff_w = (xx[i+1].size(2)-x.size(2))//2, (xx[i+1].size(3)-x.size(3))//2
-            remain_h, remain_w = (xx[i+1].size(2)-x.size(2))%2, (xx[i+1].size(3)-x.size(3))%2
-            
-            xx[i+1] = xx[i+1][..., diff_h+remain_h:-diff_h, diff_w+remain_w:-diff_w]  # crop 
+            x = self.upsampler[i](x, xx[i+1].shape )
             x = torch.cat((xx[i+1], x), dim=1)    # concatenate along channels dimensions
             x = self.decoder[i](x)
 
         return self.output(x)
 
 
-    def _make_conv(self, in_channels:int, out_channels:int, batchnorm:bool, dropout:float, padding:int=0):
-        mods = [nn.Conv2d(in_channels=in_channels, out_channels=out_channels, kernel_size=3, stride=1, padding=padding)]
+    def _make_conv(self, in_channels:int, out_channels:int, batchnorm:bool, dropout:float):
+        mods = [nn.Conv2d(in_channels=in_channels, out_channels=out_channels, kernel_size=3, stride=1, padding=1)]
         if batchnorm:
             mods.append(nn.BatchNorm2d(num_features=out_channels))
-        if dropout>0:
+        if dropout > 0:
             mods.append(nn.Dropout(dropout))
         mods.append(nn.ReLU())
         return mods
