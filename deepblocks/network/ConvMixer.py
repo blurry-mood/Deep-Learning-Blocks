@@ -45,7 +45,7 @@ class ConvMixer(nn.Module):
                                          nn.GELU(),
                                          nn.BatchNorm2d(hidden_dimension))
         
-        self.hidden = nn.Sequential(ConvMixerLayer(hidden_dimension, kernel_size) for _ in range(depth))
+        self.hidden = nn.Sequential(*[ConvMixerLayer(hidden_dimension, kernel_size) for _ in range(depth)])
         self.avgpool = nn.AdaptiveAvgPool2d(1)
         self.flatten = nn.Flatten()
         self.linear = nn.Linear(hidden_dimension, num_classes)
