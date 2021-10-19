@@ -1,4 +1,4 @@
-""" This is a PyTorch implementation of the ICT-Net used in """
+""" This is a PyTorch implementation of the ICT-Net"""
 from typing import List
 from torch import nn
 import torch
