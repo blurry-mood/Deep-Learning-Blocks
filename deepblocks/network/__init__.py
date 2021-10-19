@@ -5,7 +5,9 @@ The implementation of networks offer more parameters (than in original work) to 
 It contains:
     - U-Net
     - ICT-Net 
+    - ConvMixer
 """
 
-from .ICTNet import ICTNet
 from .UNet import UNet
+from .ConvMixer import ConvMixer
+from .ICTNet import ICTNet
