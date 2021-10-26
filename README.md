@@ -1,27 +1,29 @@
 # Deep-Learning-Blocks
 A library with customized PyTorch layers and model components.
 
-- [Install](README.md#install)
-- [Documentation](README.md#documentation)
-- [What's available](README.md#whats-available)
-- [Bug/Feature](README.md#bug-or-feature)
+- [Install](https://github.com/blurry-mood/Deep-Learning-Blocks/blob/main/README.md#install)
+- [Documentation](https://github.com/blurry-mood/Deep-Learning-Blocks/blob/main/README.md#documentation)
+- [What's available](https://github.com/blurry-mood/Deep-Learning-Blocks/blob/main/README.md#whats-available)
+- [Bug/Feature](https://github.com/blurry-mood/Deep-Learning-Blocks/blob/main/README.md#bug-or-feature)
 
 ## Install:
 To install the latest stable version:
 > pip install deepblocks
 
 For a specific version:
-> pip install deepblocks==0.1.1
+> pip install deepblocks==0.1.9
 
 To install the latest, but unstable version:
 > pip install git+https://github.com/blurry-mood/Deep-Learning-Blocks
 
 ## What's available:
 ### **Networks**
+* ConvMixer
 * U-Net
 * ICT-Net
 
 ### **Layers**
+* ConvMixer Layer
 * Flip-Invariant Conv2d
 * Squeeze-Excitation Block
 * Dense Block
