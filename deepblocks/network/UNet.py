@@ -82,7 +82,6 @@ class UNet(nn.Module):
 
     def forward(self, x:torch.Tensor):
         """ """
-        print('\n\n')
         xx = [self.conv1(x)] # store encoder outputs
         for i in range(len(self.encoder)):
             xx.append(self.encoder[i](xx[-1]))
