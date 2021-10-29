@@ -53,7 +53,7 @@ class UNet(nn.Module):
         super().__init__()
 
         self.conv1 = nn.Sequential(
-            *self._make_conv(1, 64, batchnorm=batchnorm, dropout=dropout),
+            *self._make_conv(in_channels, 64, batchnorm=batchnorm, dropout=dropout),
             *self._make_conv(64, 64, batchnorm=batchnorm, dropout=dropout),
         )
 
